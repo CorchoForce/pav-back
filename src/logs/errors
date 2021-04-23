@@ -1,0 +1,12 @@
+
+ Error: An error occurred
+    at /home/rodrigo/Documents/pa/back/src/routes/index.js:5:11
+    at Layer.handle [as handle_request] (/home/rodrigo/Documents/pa/back/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/rodrigo/Documents/pa/back/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/rodrigo/Documents/pa/back/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/rodrigo/Documents/pa/back/node_modules/express/lib/router/layer.js:95:5)
+    at /home/rodrigo/Documents/pa/back/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/rodrigo/Documents/pa/back/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/rodrigo/Documents/pa/back/node_modules/express/lib/router/index.js:275:10)
+    at Function.handle (/home/rodrigo/Documents/pa/back/node_modules/express/lib/router/index.js:174:3)
+    at router (/home/rodrigo/Documents/pa/back/node_modules/express/lib/router/index.js:47:12)
