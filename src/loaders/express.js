@@ -3,20 +3,12 @@ const path = require("path");
 const logger = require("../services/logger");
 const fs = require("fs");
 const cors = require("cors");
-
+const c = require("../config");
 //Initializes express
 const init = ({ expressApp: app }) =>
   new Promise((resolve, reject) => {
-    let isProd;
-    if (process.env.PRODUCTION === "FALSE") {
-      isProd = false;
-    } else if (process.env.PRODUCTION === "TRUE") {
-      isProd = true;
-    } else {
-      reject("Incorrect production env value");
-    }
     const corsOptions = {
-      origin: isProd ? process.env.FRONTURL : "*",
+      origin: c().isProduction() ? process.env.FRONT_URL : "*",
       optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
     };
     app.use(cors(corsOptions));

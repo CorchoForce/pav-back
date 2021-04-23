@@ -4,7 +4,8 @@ const dotenv = require("dotenv");
 const app = express();
 dotenv.config();
 const PORT = process.env.PORT;
-
+const c = require("./config");
+c();
 loader({
   expressApp: app,
 })
