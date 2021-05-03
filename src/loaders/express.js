@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const logger = require("../services/logger");
+const logger = require("../utils/logger");
 const fs = require("fs");
 const cors = require("cors");
 const c = require("../config");
@@ -29,10 +29,7 @@ const init = ({ expressApp: app }) =>
 
     //Uncaught error handler middleware
     app.use(function (err, req, res, next) {
-      const filepath = path.join("../", "src/logs/errors");
-      logger(filepath, `\n ${err.stack}`).catch((err) => {
-        console.log(`Logger failed error: ${err}`);
-      });
+      console.log(err.stack);
       res.status(500).send({ error: "Unexpected Error" });
     });
     resolve();
