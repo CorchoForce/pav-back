@@ -15,7 +15,7 @@ const offerSchema = new Schema({
   pay: String,
   beginningDate: Date,
   localization: String,
-  neededHours: Number,
+  neededHours: String,
   user: {
     description: String,
     email: String,
