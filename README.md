@@ -16,11 +16,11 @@
 
 ## About
 
-É bem estabelecido entre os alunos da Universidade Federal do Rio de Janeiro (UFRJ) que as vagas de estágio, iniciação científica e extensão ofertadas não são bem divulgadas. Entre papéis grampeados nos incontáveis murais nos corredores dos campi, que podem muito bem datar de anos, e e-mails que ficam perdidos na caixa de entrada em meio a diversas oportunidades, um estudante que está procurando uma oportunidade do tipo se sente perdido e desamparado pela universidade.
+It is well established among students at the Federal University of Rio de Janeiro (UFRJ) that internship, scientific initiation and extension opportunities offered are not well publicized. Between papers taped to the countless murals in the corridors of campuses, which may well date back to years, and emails that get lost in the inbox amidst many opportunities, a student who is looking for an opportunity of the type feels lost and helpless by the University.
 
-Os recrutadores também são prejudicados com esse processo confuso. Muitas vezes, dependem da boa vontade de professores para encaminhar suas vagas para os alunos de perfil desejado, ou então acabam na caixa de entrada de estudantes de cursos que fogem totalmente do escopo da vaga proposta. Um sistema que os ajude será de grande valor para a empresa, laboratório ou projeto em que trabalham.
+Recruiters are also hampered by this confusing process. Often, they depend on the goodwill of teachers to forward their vacancies to students of the desired profile, or else they end up in the inbox of students of courses that are totally outside the scope of the proposed vacancy. A system that helps them will be of great value to the company, laboratory or project in which they work.
 
-Dessa forma, foi identificada a necessidade de um sistema que seja um agregador de oportunidades de estágio, iniciação científica e extensão para alunos da universidade pelos membros da CorchoForce. O projeto foi realizado dentro do escopo da disciplina de Programação Avançada (EEL418), da Escola Politécnica da UFRJ, e orientado pelo professor Cláudio Miceli de Farias, do Programa de Engenharia de Sistemas e Computação da COPPE/UFRJ. 
+Thus, the need for a system that aggregates internship opportunities, scientific initiation and extension for university students by the members of CorchoForce was identified. The project was carried out within the scope of the Advanced Programming discipline (EEL418), from the Polytechnic School of UFRJ, and guided by Professor Cláudio Miceli de Farias, from the Program for Systems and Computer Engineering at COPPE/UFRJ.
 
 ## Requirements
 
