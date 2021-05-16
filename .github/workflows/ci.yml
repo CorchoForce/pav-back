@@ -33,12 +33,12 @@ jobs:
       - name: Run Unit Tests
         run: npm run test
         env:
-          FRONT_URL: ${{ secrets.FRONT_URL }}
-          MONGO_DB: ${{ secrets.MONGO_DB }}
-          MONGO_HOSTNAME: ${{ secrets.MONGO_HOSTNAME }}
-          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
-          MONGO_PORT: ${{ secrets.MONGO_PORT }}
-          MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }}
-          PRODUCTION: "FALSE"
-          SERVER_PORT: ${{ secrets.SERVER_PORT }}
-          URL: ${{ secrets.URL }}
+          front_url: ${{ secrets.FRONT_URL }}
+          mongo_db: ${{ secrets.MONGO_DB }}
+          mongo_hostname: ${{ secrets.MONGO_HOSTNAME }}
+          mongo_password: ${{ secrets.MONGO_PASSWORD }}
+          mongo_port: ${{ secrets.MONGO_PORT }}
+          mongo_username: ${{ secrets.MONGO_USERNAME }}
+          production: "FALSE"
+          server_port: ${{ secrets.SERVER_PORT }}
+          url: ${{ secrets.URL }}
