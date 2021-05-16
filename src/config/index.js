@@ -10,7 +10,8 @@ const config = () => {
     } else if (process.env.PRODUCTION === "TRUE") {
       obj.isProduction = true;
     } else {
-      console.log(process.env.PRODUCTION);
+      console.log("FLAAAAAAAAAAAG");
+      console.log(process.env);
       throw new Error("Incorrect production env value");
     }
   }
