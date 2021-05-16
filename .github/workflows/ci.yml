@@ -39,6 +39,6 @@ jobs:
           MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
           MONGO_PORT: ${{ secrets.MONGO_PORT }}
           MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }}
-          PRODUCTION: ${{ secrets.PRODUCTION }}
+          PRODUCTION: FALSE
           SERVER_PORT: ${{ secrets.SERVER_PORT }}
           URL: ${{ secrets.URL }}
