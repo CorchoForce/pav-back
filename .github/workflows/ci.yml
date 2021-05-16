@@ -39,6 +39,6 @@ jobs:
           mongo_password: ${{ secrets.MONGO_PASSWORD }}
           mongo_port: ${{ secrets.MONGO_PORT }}
           mongo_username: ${{ secrets.MONGO_USERNAME }}
-          mongo_production: ${{ secrets.PRODUCTION }}
+          production: ${{ secrets.PRODUCTION }}
           server_port: ${{ secrets.SERVER_PORT }}
           url: ${{ secrets.URL }}
