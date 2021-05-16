@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    depends_on:
+      - db
     image: nodejs
     container_name: nodejs
     restart: unless-stopped
@@ -23,7 +25,7 @@ services:
       - logs:/home/node/app/src/logs
     networks:
       - app-network
-    command: ./wait-for.sh db:27017 -- npm run dev
+    command: npm run dev
 
   db:
     image: mongo:4.1.8-xenial
