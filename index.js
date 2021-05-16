@@ -22,4 +22,3 @@ dbMem.connect().then(() => {
     });
   return;
 });
-console.log("hihihihihi");
