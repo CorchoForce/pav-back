@@ -12,7 +12,7 @@ const offerSchema = new Schema({
   tags: [String],
   description: String,
   deadline: Date,
-  pay: Number,
+  pay: String,
   beginningDate: Date,
   localization: String,
   neededHours: Number,
