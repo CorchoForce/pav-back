@@ -1,4 +1,6 @@
 const offerModel = require("../../models/offers");
+const c = require("../../config")();
+
 const seedOffers = [
   {
     title: "Estágio boladão",
@@ -105,20 +107,21 @@ const seedOffers = [
 ];
 
 const promise = new Promise((resolve, rejcet) => {
-  offerModel
-    .findOne({})
-    .exec()
-    .then((offers) => {
-      if (offers === null) {
-        return offerModel.insertMany(seedOffers);
-      } else {
+  if (c.isProduction()) resolve();
+  else {
+    offerModel
+      .findOne({})
+      .exec()
+      .then((offers) => {
+        if (offers === null) {
+          offerModel.insertMany(seedOffers);
+        }
         resolve();
-        return;
-      }
-    })
-    .catch((err) => {
-      rejcet(err);
-    });
+      })
+      .catch((err) => {
+        rejcet(err);
+      });
+  }
 });
 
 //const promise =
