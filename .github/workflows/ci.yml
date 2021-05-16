@@ -32,3 +32,13 @@ jobs:
 
       - name: Run Unit Tests
         run: npm run test
+        env: # Or as an environment variable
+          front_url: ${{ secrets.FRONT_URL }}
+          mongo_db: ${{ secrets.MONGO_DB }}
+          mongo_hostname: ${{ secrets.MONGO_HOSTNAME }}
+          mongo_password: ${{ secrets.MONGO_PASSWORD }}
+          mongo_port: ${{ secrets.MONGO_PORT }}
+          mongo_username: ${{ secrets.MONGO_USERNAME }}
+          production: ${{ secrets.PRODUCTION }}
+          server_port: ${{ secrets.SERVER_PORT }}
+          url: ${{ secrets.URL }}
