@@ -68,7 +68,7 @@ $ touch .env
  MONGO_USERNAME=root #Mongo username
  MONGO_PASSWORD=123 #Mongo password
  MONGO_PORT=27017 # Mongo port
- MONGO_DB=sharkinfo #Mongo database
+ MONGO_DB=pav #Mongo database
  MONGO_HOSTNAME=127.0.0.1 #Mongo hostname
 
 #Run the docker-compose file
