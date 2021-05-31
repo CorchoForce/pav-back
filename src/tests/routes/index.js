@@ -35,6 +35,7 @@ describe("Autentication ", () => {
       .post("/register")
       .send(body)
       .end((err, res) => {
+        console.log(process.env.APP_KEY);
         const decoded = jwt.verify(res.body.token, process.env.APP_KEY);
         Object.keys(body).forEach((val) => {
           if (val != "password") {
