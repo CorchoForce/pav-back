@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 function sign(data, expires = "7d") {
+  console.log(process.env.APP_KEY);
   return jwt.sign(data.toJSON(), process.env.APP_KEY, {
     expiresIn: expires,
   });
