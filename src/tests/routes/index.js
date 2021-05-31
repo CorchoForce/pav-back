@@ -8,6 +8,7 @@ const dbMem = require("../../db/memory");
 const jwt = require("jsonwebtoken");
 const { expect } = require("chai");
 
+console.log(process.env);
 chai.use(chaiHttp);
 
 before(async () => {
@@ -47,7 +48,6 @@ describe("Autentication ", () => {
         });
         should.not.exist(decoded.password);
         should.not.exist(res.body.password);
-        console.log(decoded);
         done();
       });
   });
