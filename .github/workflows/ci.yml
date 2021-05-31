@@ -33,6 +33,7 @@ jobs:
       - name: Run Unit Tests
         run: npm run test
         env:
+          APP_KEY: ${{  secrets.APP_KEY  }}
           FRONT_URL: ${{ secrets.FRONT_URL }}
           MONGO_DB: ${{ secrets.MONGO_DB }}
           MONGO_HOSTNAME: ${{ secrets.MONGO_HOSTNAME }}
@@ -42,4 +43,3 @@ jobs:
           PRODUCTION: "FALSE"
           SERVER_PORT: ${{ secrets.SERVER_PORT }}
           URL: ${{ secrets.URL }}
-          APP_KEY: ${{secrets.APP_KEY}}
