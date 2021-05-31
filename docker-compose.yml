@@ -21,7 +21,6 @@ services:
       - "8080:8080"
     volumes:
       - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
       - logs:/home/node/app/src/logs
     networks:
       - app-network
@@ -48,5 +47,4 @@ networks:
 
 volumes:
   dbdata:
-  node_modules:
   logs:
