@@ -42,3 +42,4 @@ jobs:
           PRODUCTION: "FALSE"
           SERVER_PORT: ${{ secrets.SERVER_PORT }}
           URL: ${{ secrets.URL }}
+          APP_KEY: ${{secrets.APP_KEY}}
