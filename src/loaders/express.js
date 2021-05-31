@@ -5,6 +5,7 @@ const fs = require("fs");
 const cors = require("cors");
 const c = require("../config");
 const mongoSanitize = require("express-mongo-sanitize");
+const getToken = require("../middlewares/getToken");
 
 //Initializes express
 const init = ({ expressApp: app }) =>
@@ -15,6 +16,7 @@ const init = ({ expressApp: app }) =>
     };
     app.use(cors(corsOptions));
     app.use(express.json());
+    app.use(getToken);
     //Sanitize for nosql injection
     app.use(mongoSanitize());
 

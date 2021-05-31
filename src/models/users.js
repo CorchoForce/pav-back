@@ -2,10 +2,23 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  name: String,
-  email: String,
-  password: String,
-  CPF: String,
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  CPF: {
+    type: String,
+    required: true,
+  },
 });
 
 userSchema.methods.toJSON = function () {

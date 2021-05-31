@@ -36,7 +36,6 @@ router.get("/", (req, res, next) => {
     req.query.search === undefined
       ? {}
       : { $text: { $search: req.query.search } };
-  console.log(query);
   offers = offerModel.find(query).exec();
   offers
     .then((offers) => {

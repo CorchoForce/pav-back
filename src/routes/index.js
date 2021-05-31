@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const userModel = require("../models/users");
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
+const { sign, verify } = require("../utils/jwt");
 
 router.get("/", (req, res) => {
   res.json({ message: "Hello World\n" });
@@ -14,14 +14,20 @@ router.post("/register", (req, res, next) => {
   user
     .save()
     .then((user) => {
-      const token = jwt.sign(user.toJSON(), process.env.APP_KEY, {
-        expiresIn: "1800s",
-      });
+      const token = sign(user);
       res.json({ user, token: token });
     })
     .catch((err) => {
-      next(err);
+      if (err instanceof mongoose.mongo.MongoError && err.code === 11000) {
+        res.status(420).json({ message: "Email already registered" });
+      } else {
+        next(err);
+      }
     });
+});
+
+router.get("/getdetails", (req, res, next) => {
+  res.json(req.authUser);
 });
 
 module.exports = { url: "/", router };
