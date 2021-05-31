@@ -21,7 +21,6 @@ router.post("/", (req, res, next) => {
 
 router.get("/search", (req, res, next) => {
   const query = req.query.search;
-  console.log(req.query.search);
   offers = offerModel.find({ $text: { $search: query } }).exec();
   offers
     .then((offers) => {
