@@ -8,7 +8,6 @@ const dbMem = require("../../db/memory");
 const jwt = require("jsonwebtoken");
 const { expect } = require("chai");
 
-console.log(process.env);
 chai.use(chaiHttp);
 
 before(async () => {
@@ -36,7 +35,6 @@ describe("Autentication ", () => {
       .post("/register")
       .send(body)
       .end((err, res) => {
-        console.log(process.env.APP_KEY);
         const decoded = jwt.verify(res.body.token, process.env.APP_KEY);
         Object.keys(body).forEach((val) => {
           if (val != "password") {
