@@ -16,12 +16,14 @@ const offerSchema = new Schema({
   beginningDate: Date,
   localization: String,
   neededHours: String,
-  user: {
-    description: String,
-    email: String,
-  },
 });
 
-const offerModel = mongoose.model("Offer", offerSchema);
+offerSchema.index({
+  title: "text",
+  type: "text",
+  requirements: "text",
+  description: "text",
+  tags: "text",
+});
 
-module.exports = offerModel;
+module.exports = mongoose.model("Offer", offerSchema);
