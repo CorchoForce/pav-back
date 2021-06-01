@@ -31,5 +31,10 @@
   },
   "lint-staged": {
     "*.{js,css,md}": "prettier --write"
+  },
+  "config": {
+    "mongodbMemoryServer": {
+      "debug": "1" 
+    }
   }
 }
