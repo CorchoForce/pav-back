@@ -33,6 +33,7 @@ const body = {
   beginningDate: Date.now(),
   localization: "CT",
   neededHours: 8,
+  contactEmail: "email@email.com",
 };
 
 describe("Offers", () => {
