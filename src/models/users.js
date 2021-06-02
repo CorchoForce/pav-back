@@ -23,7 +23,7 @@ const userSchema = new Schema({
   },
   CPF: {
     type: String,
-    required: true,
+    required: false,
   },
 });
 

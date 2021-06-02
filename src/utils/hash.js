@@ -9,7 +9,6 @@ function generateSalt(length) {
 
 function generateHashPassword(password, iSalt) {
   const salt = iSalt || generateSalt(32);
-  console.log(salt, iSalt);
   const hash = crypto.createHmac("sha512", salt);
   hash.update(password);
   const value = hash.digest("hex");

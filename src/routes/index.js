@@ -4,16 +4,17 @@ const userModel = require("../models/users");
 const mongoose = require("mongoose");
 const { sign, verify } = require("../utils/jwt");
 const { generateHashPassword } = require("../utils/hash");
+const authenticate = require("../middlewares/authenticate");
 
 router.get("/", (req, res) => {
   res.json({ message: "Hello World\n" });
 });
 
-//validate e mudar parte de autenticação
+//validate e reuuired error
 router.post("/register", (req, res, next) => {
   const newUser = req.body;
   newUser.password = generateHashPassword(newUser.password);
-  const user = new userModel(req.body);
+  const user = new userModel(newUser);
   user
     .save()
     .then((user) => {
@@ -52,7 +53,7 @@ router.post("/login", (req, res, next) => {
     });
 });
 
-router.get("/getdetails", (req, res, next) => {
+router.get("/getdetails", authenticate, (req, res, next) => {
   res.json(req.authUser);
 });
 
