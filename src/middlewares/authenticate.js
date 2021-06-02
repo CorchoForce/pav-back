@@ -1,7 +1,7 @@
 const { verify } = require("../utils/jwt");
 const jwt = require("jsonwebtoken");
 
-function getToken(req, res, next) {
+function authenticate(req, res, next) {
   const data = req.headers.authorization;
   if (data !== undefined && data.substring(0, 7) === "Bearer ") {
     const token = data.substring(7);
@@ -21,9 +21,8 @@ function getToken(req, res, next) {
       }
     }
   } else {
-    req.authUser = null;
-    next();
+    res.status(401).json({ message: "Token not in Header" });
   }
 }
 
-module.exports = getToken;
+module.exports = authenticate;

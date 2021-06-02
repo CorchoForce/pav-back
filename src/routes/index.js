@@ -3,14 +3,18 @@ const router = express.Router();
 const userModel = require("../models/users");
 const mongoose = require("mongoose");
 const { sign, verify } = require("../utils/jwt");
+const { generateHashPassword } = require("../utils/hash");
+const authenticate = require("../middlewares/authenticate");
 
 router.get("/", (req, res) => {
   res.json({ message: "Hello World\n" });
 });
 
-//validate e mudar parte de autenticação
+//validate e reuuired error
 router.post("/register", (req, res, next) => {
-  const user = new userModel(req.body);
+  const newUser = req.body;
+  newUser.password = generateHashPassword(newUser.password);
+  const user = new userModel(newUser);
   user
     .save()
     .then((user) => {
@@ -26,7 +30,30 @@ router.post("/register", (req, res, next) => {
     });
 });
 
-router.get("/getdetails", (req, res, next) => {
+router.post("/login", (req, res, next) => {
+  user = userModel.findOne({ email: req.body.email }).exec();
+  user
+    .then((user) => {
+      if (user === null) {
+        res.status(422).json({ message: "Email doesn't exist" });
+      }
+      const input_password = generateHashPassword(
+        req.body.password,
+        user.password.salt
+      );
+      if (input_password.hash === user.password.hash) {
+        const token = sign(user);
+        res.json({ user, token: token });
+      } else {
+        res.status(422).json({ message: "Incorrect password" });
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.get("/getdetails", authenticate, (req, res, next) => {
   res.json(req.authUser);
 });
 

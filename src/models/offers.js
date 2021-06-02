@@ -11,11 +11,9 @@ const offerSchema = new Schema({
     type: String,
   },
   requirements: {
-    required: true,
     type: String,
   },
   site: {
-    required: true,
     type: String,
   },
   tags: {
@@ -43,6 +41,10 @@ const offerSchema = new Schema({
     type: String,
   },
   neededHours: {
+    required: true,
+    type: String,
+  },
+  contactEmail: {
     required: true,
     type: String,
   },
