@@ -16,10 +16,7 @@ const seedOffers = [
     beginningDate: Date.now(),
     localization: "CCS",
     neededHours: "De 20 a 30 horas semanais a ser acordada",
-    user: {
-      description: "Empresa: Eletronuclear",
-      email: "linaalm@eletronuclear.gov.br",
-    },
+    contactEmail: "linaalm@eletronuclear.gov.br",
   },
   {
     title: "Vagas Pesquisa e Desenvolvimento Hilab",
@@ -34,10 +31,7 @@ const seedOffers = [
     beginningDate: Date.parse("2021-07-01"),
     localization: "Curitiba - Remoto",
     neededHours: "30 horas semanais",
-    user: {
-      description: "Isabela Dalagnol Holanda, Gente e Gestão da Hilab",
-      email: "isabela.holanda@hitechnologies.com.br",
-    },
+    contactEmail: "isabela.holanda@hitechnologies.com.br",
   },
   {
     title: "Estágio e Júnior - Pessoa Desenvolvedora Full-Stack",
@@ -53,10 +47,7 @@ const seedOffers = [
     beginningDate: Date.parse("2021-08-01"),
     localization: "Remoto",
     neededHours: "30 horas semanais",
-    user: {
-      description: "V360",
-      email: "Não informado",
-    },
+    contactEmail: "Não informado",
   },
   {
     title: "Estágio Diel Energia",
@@ -72,10 +63,7 @@ const seedOffers = [
     beginningDate: Date.now(),
     localization: "Botafogo - RJ",
     neededHours: "20 horas semanais.",
-    user: {
-      description: "Diel Energia",
-      email: "diel@dielenergia.com (Carolina Almeida)",
-    },
+    contactEmail: "diel@dielenergia.com (Carolina Almeida)",
   },
   {
     title: "Vaga de Iniciação Científica na LABSEN",
@@ -91,10 +79,7 @@ const seedOffers = [
     beginningDate: Date.now(),
     localization: "CT",
     neededHours: "20 horas semanais",
-    user: {
-      description: "LABSEN",
-      email: "labsen.oceanica.ufrj.br",
-    },
+    contactEmail: "labsen.oceanica.ufrj.br",
   },
   {
     title: "Guthib",
@@ -109,10 +94,7 @@ const seedOffers = [
     beginningDate: Date.now(),
     localization: "Estados Unidos",
     neededHours: "30 horas semanais",
-    user: {
-      description: "Guthib",
-      email: "opportunities@guthib.com",
-    },
+    contactEmail: "opportunities@guthib.com",
   },
   {
     title: "UFRJ Analytica",
@@ -127,10 +109,7 @@ const seedOffers = [
     beginningDate: Date.parse("2021-07-07"),
     localization: "CT-UFRJ",
     neededHours: "20 horas semanais",
-    user: {
-      description: "UFRJ Analytica",
-      email: "analytica@poli.ufrj.br",
-    },
+    contactEmail: "analytica@poli.ufrj.br",
   },
   {
     title: "Oportunidade Miceli Company",
@@ -146,10 +125,7 @@ const seedOffers = [
     beginningDate: Date.now(),
     localization: "Leblon - RJ",
     neededHours: "20 horas semanais",
-    user: {
-      description: "Miceli Company",
-      email: "mi.celicomp@ny.com",
-    },
+    contactEmail: "mi.celicomp@ny.com",
   },
   {
     title: "Emprego de Engenheiro Devops",
@@ -165,10 +141,7 @@ const seedOffers = [
     beginningDate: Date.now(),
     localization: "Barra da Tijuca",
     neededHours: "40 horas semanais",
-    user: {
-      description: "Petrec",
-      email: "vagas@petrec.com.br",
-    },
+    contactEmail: "vagas@petrec.com.br",
   },
   {
     title:
@@ -184,10 +157,7 @@ const seedOffers = [
     beginningDate: Date.parse("2021-08-31"),
     localization: "CT",
     neededHours: "N / A",
-    user: {
-      description: "Marcos",
-      email: "crmssa.ufrj@gmail.com",
-    },
+    contactEmail: "crmssa.ufrj@gmail.com",
   },
 ];
 
