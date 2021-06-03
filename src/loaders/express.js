@@ -10,7 +10,6 @@ const mongoSanitize = require("express-mongo-sanitize");
 const init = ({ expressApp: app }) =>
   new Promise((resolve, reject) => {
     const corsOptions = {
-      //origin: c().isProduction() ? process.env.FRONT_URL : "*",
       origin: "*",
       optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
     };
