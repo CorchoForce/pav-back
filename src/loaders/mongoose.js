@@ -8,7 +8,6 @@ const init = (config) => {
     MONGO_USERNAME,
     MONGO_PASSWORD,
     MONGO_HOSTNAME,
-    MONGO_PORT,
     MONGO_DB,
   } = process.env;
 
@@ -18,7 +17,6 @@ const init = (config) => {
     useUnifiedTopology: true,
     useFindAndModify: false,
   };
-
   const url = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}/${MONGO_DB}`;
   return mongoose.connect(url, options);
 };
