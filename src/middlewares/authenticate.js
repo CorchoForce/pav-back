@@ -13,15 +13,15 @@ function authenticate(req, res, next) {
       next();
     } catch (e) {
       if (e instanceof jwt.TokenExpiredError) {
-        res.status(401).json({ message: "Token expired" });
+        res.status(401).json({ message: "Token expirado" });
       } else if (e instanceof jwt.JsonWebTokenError) {
-        res.status(401).json({ message: "Invalid Signature" });
+        res.status(401).json({ message: "Assinatura invalida" });
       } else {
         next(e);
       }
     }
   } else {
-    res.status(401).json({ message: "Token not in Header" });
+    res.status(401).json({ message: "Token não está no header" });
   }
 }
 
