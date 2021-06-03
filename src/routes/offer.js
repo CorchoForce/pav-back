@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 
+//cuspil tem que tratar os erros de validação melhor aqui
 router.post("/", (req, res, next) => {
   const offer = new offerModel(req.body);
   offer
@@ -58,7 +59,7 @@ router.get("/:offerId", (req, res, next) => {
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
-        res.status(400).send({ error: "Incorrect id" });
+        res.status(400).send({ error: "Id incorreta" });
       } else {
         next(err);
       }
@@ -79,7 +80,7 @@ router.put("/:offerId", (req, res, next) => {
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
-        res.status(400).send({ error: "Incorrect id" });
+        res.status(400).send({ error: "Id incorreta" });
       } else {
         next(err);
       }
@@ -98,7 +99,7 @@ router.delete("/:offerId", (req, res, next) => {
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
-        res.status(400).send({ error: "Incorrect id" });
+        res.status(400).send({ error: "Id incorreta" });
       } else {
         next(err);
       }
