@@ -18,6 +18,7 @@ const init = (config) => {
     useFindAndModify: false,
   };
   const url = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}/${MONGO_DB}`;
+  console.log(url)
   return mongoose.connect(url, options);
 };
 
