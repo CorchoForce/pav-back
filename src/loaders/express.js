@@ -19,6 +19,14 @@ const init = ({ expressApp: app }) =>
     //Sanitize for nosql injection
     app.use(mongoSanitize());
 
+    if (process.env.NODE_ENV === 'production') {
+      app.use(express.static('client/build'));
+    }
+    
+    app.get('*', (request, response) => {
+      response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    });
+
     //loads every route file
     try {
       fs.readdirSync("./src/routes").forEach((file) => {
