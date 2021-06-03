@@ -19,14 +19,6 @@ const init = ({ expressApp: app }) =>
     //Sanitize for nosql injection
     app.use(mongoSanitize());
 
-    if (process.env.NODE_ENV === 'production') {
-      app.use(express.static('client/build'));
-    }
-    
-    app.get('*', (request, response) => {
-      response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-    });
-
     //loads every route file
     try {
       fs.readdirSync("./src/routes").forEach((file) => {
@@ -44,7 +36,7 @@ const init = ({ expressApp: app }) =>
     //Uncaught error handler middleware
     app.use(function (err, req, res, next) {
       console.log(err.stack);
-      res.status(500).send({ error: "Unexpected Error" });
+      res.status(500).send({ error: err.stack });
     });
     resolve();
   });
