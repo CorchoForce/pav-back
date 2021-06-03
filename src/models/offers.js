@@ -6,22 +6,56 @@ const offerSchema = new Schema({
     required: true,
     type: String,
   },
-  type: String,
-  requirements: String,
-  site: String,
-  tags: [String],
-  description: String,
-  deadline: Date,
-  pay: String,
-  beginningDate: Date,
-  localization: String,
-  neededHours: String,
-  user: {
-    description: String,
-    email: String,
+  type: {
+    required: true,
+    type: String,
+  },
+  requirements: {
+    type: String,
+  },
+  site: {
+    type: String,
+  },
+  tags: {
+    required: true,
+    type: [String],
+  },
+  description: {
+    required: true,
+    type: String,
+  },
+  deadline: {
+    required: true,
+    type: Date,
+  },
+  pay: {
+    required: true,
+    type: String,
+  },
+  beginningDate: {
+    required: true,
+    type: Date,
+  },
+  localization: {
+    required: true,
+    type: String,
+  },
+  neededHours: {
+    required: true,
+    type: String,
+  },
+  contactEmail: {
+    required: true,
+    type: String,
   },
 });
 
-const offerModel = mongoose.model("Offer", offerSchema);
+offerSchema.index({
+  title: "text",
+  type: "text",
+  requirements: "text",
+  description: "text",
+  tags: "text",
+});
 
-module.exports = offerModel;
+module.exports = mongoose.model("Offer", offerSchema);

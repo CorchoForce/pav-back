@@ -33,10 +33,7 @@ const body = {
   beginningDate: Date.now(),
   localization: "CT",
   neededHours: 8,
-  user: {
-    description: "Empresa Boladona",
-    email: "boladona@boladona.com",
-  },
+  contactEmail: "email@email.com",
 };
 
 describe("Offers", () => {
@@ -75,24 +72,6 @@ describe("Offers", () => {
 
   describe("/POST offer", () => {
     it("it should create a offer with all correct keys", (done) => {
-      const body = {
-        title: "Estágio boladão 355",
-        type: "Estágio",
-        requirements: "Ciclo Básico completo",
-        site: "www.ufr.br",
-        tags: ["Estágio", "Boladão"],
-        description:
-          "Vivamus ultricies quis orci ut sodales. Quisque maximus quis diam eget lobortis. Sed rutrum porttitor urna, at pulvinar orci accumsan eget. Donec congue elit tellus, varius tincidunt nisi laoreet at. Aliquam ut auctor lorem. Proin arcu nisl, dapibus ut finibus semper, dignissim quis massa. Donec pellentesque dignissim ligula et placerat. ",
-        deadline: Date.now(),
-        pay: 300,
-        beginningDate: Date.now(),
-        localization: "CT",
-        neededHours: 8,
-        user: {
-          description: "Empresa Boladona",
-          email: "boladona@boladona.com",
-        },
-      };
       chai
         .request(server)
         .post("/offer")

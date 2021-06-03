@@ -6,6 +6,7 @@ dotenv.config();
 const PORT = process.env.SERVER_PORT || 8080;
 require("./config")();
 const seed = require("./db/seeds");
+seed();
 
 const end = loader({
   expressApp: app,

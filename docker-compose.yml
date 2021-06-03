@@ -3,7 +3,7 @@ version: '3'
 services:
   nodejs:
     build:
-      context: .
+      context: ./
       dockerfile: Dockerfile
     depends_on:
       - db
@@ -21,8 +21,8 @@ services:
       - "8080:8080"
     volumes:
       - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
       - logs:/home/node/app/src/logs
+      - node_modulesv:/home/node/app/node_modules
     networks:
       - app-network
     command: npm run dev
@@ -48,5 +48,5 @@ networks:
 
 volumes:
   dbdata:
-  node_modules:
   logs:
+  node_modulesv:
