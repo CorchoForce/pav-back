@@ -19,11 +19,11 @@ router.post("/register", (req, res, next) => {
     .save()
     .then((user) => {
       const token = sign(user);
-      res.json({ user, token: token });
+      res.status(201).json({ user, token: token });
     })
     .catch((err) => {
       if (err instanceof mongoose.mongo.MongoError && err.code === 11000) {
-        res.status(420).json({ message: "Email already registered" });
+        res.status(422).json({ message: "Email já registrado" });
       } else {
         next(err);
       }
@@ -35,7 +35,8 @@ router.post("/login", (req, res, next) => {
   user
     .then((user) => {
       if (user === null) {
-        res.status(422).json({ message: "Email doesn't exist" });
+        res.status(422).json({ message: "Email não cadastrado" });
+        return;
       }
       const input_password = generateHashPassword(
         req.body.password,
@@ -45,7 +46,7 @@ router.post("/login", (req, res, next) => {
         const token = sign(user);
         res.json({ user, token: token });
       } else {
-        res.status(422).json({ message: "Incorrect password" });
+        res.status(422).json({ message: "Senha incorreta" });
       }
     })
     .catch((err) => {
