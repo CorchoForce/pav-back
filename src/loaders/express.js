@@ -35,7 +35,7 @@ const init = ({ expressApp: app }) =>
     //Uncaught error handler middleware
     app.use(function (err, req, res, next) {
       console.log(err.stack);
-      res.status(500).send({ error: err.stack });
+      res.status(500).send({ error: "Unexpected Error" });
     });
     resolve();
   });
