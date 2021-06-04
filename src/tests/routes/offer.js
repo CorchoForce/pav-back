@@ -38,7 +38,7 @@ const body = {
 
 describe("Offers", () => {
   describe("/GET offer", () => {
-    it("it should GET no book", (done) => {
+    it("it should GET no offer", (done) => {
       chai
         .request(server)
         .get("/offer")
@@ -49,7 +49,7 @@ describe("Offers", () => {
           done();
         });
     });
-    it("it should GET a list with created book", (done) => {
+    it("it should GET a list with created offer", (done) => {
       const createdOffer = new offerModel(body);
       createdOffer.save((err, offer) => {
         chai
@@ -106,8 +106,8 @@ describe("Offers", () => {
       });
     });
   });
-  describe("/PUT/:id book", () => {
-    it("it should UPDATE a book given the id", (done) => {
+  describe("/PUT/:id offer", () => {
+    it("it should UPDATE a offer given the id", (done) => {
       const createdOffer = new offerModel(body);
       const change = { title: "Estágio Super boladão" };
       createdOffer.save((err, offer) => {
@@ -129,8 +129,8 @@ describe("Offers", () => {
   /*
    * Test the /DELETE/:id route
    */
-  describe("/DELETE/:id book", () => {
-    it("it should DELETE a book given the id", (done) => {
+  describe("/DELETE/:id offer", () => {
+    it("it should DELETE a offer given the id", (done) => {
       const createdOffer = new offerModel(body);
       createdOffer.save((err, offer) => {
         chai
