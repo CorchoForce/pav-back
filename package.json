@@ -5,7 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js --trace-deprecation",
+    "dev": "nodemon src/app.js",
     "test": "mocha ./src/tests/*",
     "prepare": "husky install"
   },
@@ -14,17 +14,20 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4",
     "express-mongo-sanitize": "^2.1.0",
+    "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.7"
+    "mongoose": "^5.12.7",
+    "validator": "^13.6.0",
+    "xss": "^1.0.9"
   },
   "devDependencies": {
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
     "husky": "^6.0.0",
     "lint-staged": "^10.5.4",
-    "mocha": "^8.4.0",
+    "mocha": "^8",
     "mongodb-memory-server": "^6.9.6",
     "nodemon": "^2.0.7",
     "prettier": "2.2.1"

@@ -5,7 +5,7 @@ const fs = require("fs");
 const cors = require("cors");
 const c = require("../config");
 const mongoSanitize = require("express-mongo-sanitize");
-
+const helmet = require("helmet");
 //Initializes express
 const init = ({ expressApp: app }) =>
   new Promise((resolve, reject) => {
@@ -15,6 +15,8 @@ const init = ({ expressApp: app }) =>
     };
     app.use(cors(corsOptions));
     app.use(express.json());
+    //Serie de headers de segurança
+    app.use(helmet());
     //Sanitize for nosql injection
     app.use(mongoSanitize());
 
