@@ -8,8 +8,8 @@ const init = (config) => {
     MONGO_USERNAME,
     MONGO_PASSWORD,
     MONGO_HOSTNAME,
-    MONGO_PORT,
     MONGO_DB,
+    MONGO_PORT
   } = process.env;
 
   const options = {
@@ -18,8 +18,8 @@ const init = (config) => {
     useUnifiedTopology: true,
     useFindAndModify: false,
   };
-
-  const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
+  const url = process.env["ENV"] === 'production' ? `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}/${MONGO_DB}` :
+                                                    `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`
   return mongoose.connect(url, options);
 };
 
