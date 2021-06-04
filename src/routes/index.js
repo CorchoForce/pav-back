@@ -10,6 +10,10 @@ router.get("/", (req, res) => {
   res.json({ message: "Hello World\n" });
 });
 
+router.post("/test", (req, res) => {
+  res.json(req.body);
+});
+
 //validate e reuuired error
 router.post("/register", (req, res, next) => {
   const newUser = req.body;
