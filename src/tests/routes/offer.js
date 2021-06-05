@@ -52,6 +52,7 @@ const body = () => {
       title: "Estágio boladão 356",
       type: "Estágio",
       requirements: "Ciclo Básico completo",
+      valid: true,
       site: "www.ufr.br",
       tags: ["Estágio", "Boladão"],
       description:
