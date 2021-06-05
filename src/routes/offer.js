@@ -34,7 +34,7 @@ router.get("/search", (req, res, next) => {
 });
 
 router.get("/", (req, res, next) => {
-  const baseQuery = { "deadline": { $gte: Date.now() }}
+  const baseQuery = {deadline: {$gte: new Date().toISOString()}}
   const query =
     req.query.search === undefined
       ? baseQuery
