@@ -1,6 +1,4 @@
 function contentType(req, res, next) {
-  console.log("FLAAAAAAAAAAAAAAAAAAAAG");
-  console.log(req.is("application/json"));
   if (
     !(
       req.method === "POST" ||
