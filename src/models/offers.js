@@ -22,7 +22,6 @@ const offerSchema = new Schema({
     type: String,
   },
   tags: {
-    required: true,
     type: [String],
   },
   description: {
