@@ -24,8 +24,6 @@ router.post("/register", (req, res, next) => {
 
   newUser.password = generateHashPassword(newUser.password);
   const user = new userModel(newUser);
-  console.log(user);
-  console.log(newUser);
   user
     .save()
     .then((user) => {
