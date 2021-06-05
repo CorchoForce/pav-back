@@ -3,7 +3,7 @@ const loader = require("./loaders");
 const dotenv = require("dotenv");
 const app = express();
 dotenv.config();
-const PORT = process.env.SERVER_PORT || 8080;
+const PORT = process.env.PORT || process.env.SERVER_PORT || 8080;
 require("./config")();
 const seed = require("./db/seeds");
 seed();
