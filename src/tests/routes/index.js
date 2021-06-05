@@ -59,7 +59,7 @@ describe("Autentication ", () => {
       .end((err, res) => {
         res.should.have.status(422);
         res.body.should.be.a("object");
-        res.body.message.should.be.eql("Email já registrado");
+        res.body.message.should.be.eql("CPF ou Email já registrado");
         done();
       });
   });
