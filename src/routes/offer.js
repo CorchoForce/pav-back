@@ -34,7 +34,7 @@ router.get("/search", (req, res, next) => {
 });
 
 router.get("/", (req, res, next) => {
-  const baseQuery = {deadline: {$gte: new Date().toISOString()}}
+  const baseQuery = { $and :[{deadline: {$gte: new Date().toISOString()}}, {valid: true}]}
   const query =
     req.query.search === undefined
       ? baseQuery
@@ -119,7 +119,7 @@ router.get("/mine", authenticate, (req, res, next) => {
       res.json(offers);
     })
     .catch((err) => {
-      next(err);
+      throw err;
     });
 });
 

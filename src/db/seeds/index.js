@@ -31,6 +31,7 @@ const seedOffers = (user_id) => {
       {
         title: "Estágio Eletronuclear",
         type: "estagio",
+        valid: true,
         requirements:
           "Estar cursando Engenharia de Produção; - Alunos a partir do 6o período (com previsão de formatura a partir de 07/2022) e com CR > 6,5; - Inglês intermediário.",
         site: "N/A",
@@ -48,6 +49,7 @@ const seedOffers = (user_id) => {
       {
         title: "Vagas Pesquisa e Desenvolvimento Hilab",
         type: "estagio",
+        valid: true,
         requirements: "Ser mestrando ou doutorando",
         site: "https://hilab.com.br",
         tags: ["Estágio", "Tecnologia", "Saúde"],
@@ -64,6 +66,7 @@ const seedOffers = (user_id) => {
       {
         title: "Estágio e Júnior - Pessoa Desenvolvedora Full-Stack",
         type: "estagio",
+        valid: true,
         requirements:
           "Experiência em linguagem de programação: Ruby, Python, C#, PHP, Java ou Javascript",
         site: "https://virtual360.io/carreiras/",
@@ -81,6 +84,7 @@ const seedOffers = (user_id) => {
       {
         title: "Estágio Diel Energia",
         type: "estagio",
+        valid: true,
         requirements:
           "- Ensino superior, cursando ou concluído em Engenharia; - Desejável experiência nas áreas técnica ou operacional de projetos de HVAC-R; - Desejável experiência no desenvolvimento de projetos, instalação, comissionamento e manutenção; - Interesse em trabalhar em startups.",
         site: "N/A",
@@ -98,6 +102,7 @@ const seedOffers = (user_id) => {
       {
         title: "Vaga de Iniciação Científica na LABSEN",
         type: "bolsa_ic",
+        valid: true,
         requirements:
           "Estar cursando Engenharia, Computação e afins; CRA maior ou igual a 6,0; • Conhecimentos de programação;",
         site: "labsen.oceanica.ufrj.br",
@@ -115,6 +120,7 @@ const seedOffers = (user_id) => {
       {
         title: "Guthib",
         type: "estagio",
+        valid: true,
         requirements: "Não tem",
         site: "www.guthib.com",
         tags: ["estagio", "frontend"],
@@ -131,6 +137,7 @@ const seedOffers = (user_id) => {
       {
         title: "UFRJ Analytica",
         type: "competicao",
+        valid: false,
         requirements: "Ser aluno da UFRJ e ter interesse pela área de Dados.",
         site: "www.ufrjanalytica.com.br",
         tags: ["competicao", "datascience"],
@@ -147,6 +154,7 @@ const seedOffers = (user_id) => {
       {
         title: "Oportunidade Miceli Company",
         type: "estagio",
+        valid: true,
         requirements:
           "Conhecimento em React.js, Node.js, Nomadismo Digital, Minoxidil 3%, IOT",
         site: "www.ufr.br",
@@ -164,6 +172,7 @@ const seedOffers = (user_id) => {
       {
         title: "Emprego de Engenheiro Devops",
         type: "emprego",
+        valid: true,
         requirements:
           "Graduação completa;- Sólidos conhecimentos em programação;- Experiência em desenvolvimento de aplicações web;- Ter boa comunicação e compromisso com prazos e metas;- São diferenciais: Desenvolvimento e consumo de APIs; Nuvem(AWS, Azure ou Google);Docker e Kubernetes; Automação de processos; Testes de software; Ferramentas demonitoramento.",
         site: "www.petrec.com.br",
@@ -182,6 +191,7 @@ const seedOffers = (user_id) => {
         title:
           "Curso Ficha Única de Notificação Compulsória de Maus-Tratos e Outras Violências",
         type: "extensao",
+        valid: true,
         requirements: "N/A",
         site: "N/A",
         tags: ["Extensão", "Maus-tratos", "Violências"],

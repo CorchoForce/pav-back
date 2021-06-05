@@ -10,6 +10,10 @@ const offerSchema = new Schema({
     required: true,
     type: String,
   },
+  valid: {
+    required: true,
+    type: Boolean,
+  },
   requirements: {
     type: String,
   },
