@@ -111,16 +111,4 @@ router.delete("/:offerId", authenticate, (req, res, next) => {
     });
 });
 
-router.get("/mine", authenticate, (req, res, next) => {
-  user = req.authUser;
-  offers = offerModel.find({ "user": user._id }).exec();
-  offers
-    .then((offers) => {
-      res.json(offers);
-    })
-    .catch((err) => {
-      throw err;
-    });
-});
-
 module.exports = { url: "/offer", router };
