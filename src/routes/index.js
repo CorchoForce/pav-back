@@ -32,7 +32,7 @@ router.post("/register", (req, res, next) => {
     })
     .catch((err) => {
       if (err instanceof mongoose.mongo.MongoError && err.code === 11000) {
-        res.status(422).json({ message: "Email já registrado" });
+        res.status(422).json({ message: "CPF ou Email já registrado" });
       } else {
         console.log(err)
         next(err);
