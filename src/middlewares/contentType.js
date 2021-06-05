@@ -5,7 +5,7 @@ function contentType(req, res, next) {
       req.method === "PUT" ||
       req.method === "PATCH"
     ) ||
-    req.get("Content-Type") === "application/json"
+    (req.is('application/json') || req.is('application/json; charset=utf-8'))
   ) {
     next();
   } else {
