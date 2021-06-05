@@ -5,7 +5,7 @@ function contentType(req, res, next) {
       req.method === "PUT" ||
       req.method === "PATCH"
     ) ||
-    req.get("Content-Type") === "application/json"
+    req.get("Content-Type").trim().slice(0, 16) === "application/json"
   ) {
     next();
   } else {
