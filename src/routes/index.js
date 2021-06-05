@@ -18,9 +18,9 @@ router.post("/test", (req, res) => {
 //validate e reuuired error
 router.post("/register", (req, res, next) => {
   const newUser = req.body;
-  // if (!validateCPF(newUser.CPF)) {
-    // return(res.status(422).json({ message: "CPF inválido" }))
-  //}
+  if (!validateCPF(newUser.CPF)) {
+    return(res.status(422).json({ message: "CPF inválido" }))
+  }
 
   newUser.password = generateHashPassword(newUser.password);
   const user = new userModel(newUser);
