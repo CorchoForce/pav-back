@@ -24,8 +24,8 @@ after(async () => {
 describe("Autentication ", () => {
   const body = {
     name: "Rodrigo",
-    email: "rpalmeira1999@poli.ufrj.br",
-    CPF: "85519502587",
+    email: "pedroo@poli.ufrj.br",
+    CPF: "855.195.025-87",
     password: "123mudar",
   };
 

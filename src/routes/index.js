@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userModel = require("../models/users");
+const { validateCPF } = require("../utils/cpf")
 const mongoose = require("mongoose");
 const { sign, verify } = require("../utils/jwt");
 const { generateHashPassword } = require("../utils/hash");
@@ -17,8 +18,14 @@ router.post("/test", (req, res) => {
 //validate e reuuired error
 router.post("/register", (req, res, next) => {
   const newUser = req.body;
+  // if (!validateCPF(newUser.CPF)) {
+    // return(res.status(422).json({ message: "CPF inválido" }))
+  //}
+
   newUser.password = generateHashPassword(newUser.password);
   const user = new userModel(newUser);
+  console.log(user);
+  console.log(newUser);
   user
     .save()
     .then((user) => {
@@ -29,6 +36,7 @@ router.post("/register", (req, res, next) => {
       if (err instanceof mongoose.mongo.MongoError && err.code === 11000) {
         res.status(422).json({ message: "Email já registrado" });
       } else {
+        console.log(err)
         next(err);
       }
     });

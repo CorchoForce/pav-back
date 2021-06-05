@@ -2,10 +2,11 @@ const offerModel = require("../models/offers");
 const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
+const authenticate = require("../middlewares/authenticate");
 
-//cuspil tem que tratar os erros de validação melhor aqui
-router.post("/", (req, res, next) => {
-  const offer = new offerModel(req.body);
+router.post("/", authenticate, (req, res, next) => {
+  const user = req.authUser;
+  const offer = new offerModel({ user: user._id, ...req.body });
   offer
     .save()
     .then((offer) => {
@@ -13,7 +14,7 @@ router.post("/", (req, res, next) => {
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
-        res.status(400).send({ err });
+        res.status(422).send({ err });
       } else {
         next(err);
       }
@@ -33,10 +34,11 @@ router.get("/search", (req, res, next) => {
 });
 
 router.get("/", (req, res, next) => {
+  const baseQuery = { /*"deadline": { $gte: Date.now() }*/ }
   const query =
     req.query.search === undefined
-      ? {}
-      : { $text: { $search: req.query.search } };
+      ? baseQuery
+      : { $text: { $search: req.query.search }, ...baseQuery };
   offers = offerModel.find(query).exec();
   offers
     .then((offers) => {
@@ -66,9 +68,10 @@ router.get("/:offerId", (req, res, next) => {
     });
 });
 
-router.put("/:offerId", (req, res, next) => {
+router.put("/:offerId", authenticate, (req, res, next) => {
+  const user = req.authUser;
   offer = offerModel
-    .findByIdAndUpdate(req.params.offerId, req.body, { new: true })
+    .findOneAndUpdate({ _id: req.params.offerId, user: user._id }, req.body, { new: true })
     .exec();
   offer
     .then((offer) => {
@@ -87,8 +90,10 @@ router.put("/:offerId", (req, res, next) => {
     });
 });
 
-router.delete("/:offerId", (req, res, next) => {
-  offer = offerModel.findByIdAndRemove(req.params.offerId).exec();
+router.delete("/:offerId", authenticate, (req, res, next) => {
+  user = req.authUser;
+  offer = offerModel.findOneAndDelete({ _id: req.params.offerId, user: user._id }).exec();
+  
   offer
     .then((offer) => {
       if (offer === null) {
@@ -103,6 +108,18 @@ router.delete("/:offerId", (req, res, next) => {
       } else {
         next(err);
       }
+    });
+});
+
+router.get("/mine", authenticate, (req, res, next) => {
+  user = req.authUser;
+  offers = offerModel.find({ "user": user._id }).exec();
+  offers
+    .then((offers) => {
+      res.json(offers);
+    })
+    .catch((err) => {
+      next(err);
     });
 });
 

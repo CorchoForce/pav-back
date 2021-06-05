@@ -23,7 +23,9 @@ const userSchema = new Schema({
   },
   CPF: {
     type: String,
-    required: false,
+    required: true,
+    minLength: 11,
+    maxLength: 14
   },
 });
 

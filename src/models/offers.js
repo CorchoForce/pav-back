@@ -48,6 +48,23 @@ const offerSchema = new Schema({
     required: true,
     type: String,
   },
+  /*
+  institution: {
+    name: {
+      required = true,
+      type = String
+    },
+    description: {
+      required = true, 
+      type = String
+    }
+  },
+  */
+  user: {
+    required: true,
+    type: Schema.Types.ObjectId,
+    ref: "User"
+  }
 });
 
 offerSchema.index({
