@@ -10,6 +10,11 @@ const offerSchema = new Schema({
     required: true,
     type: String,
   },
+  valid: {
+    required: true,
+    type: Boolean,
+    default: false,
+  },
   requirements: {
     type: String,
   },
@@ -17,7 +22,6 @@ const offerSchema = new Schema({
     type: String,
   },
   tags: {
-    required: true,
     type: [String],
   },
   description: {
@@ -47,6 +51,23 @@ const offerSchema = new Schema({
   contactEmail: {
     required: true,
     type: String,
+  },
+  /*
+  institution: {
+    name: {
+      required = true,
+      type = String
+    },
+    description: {
+      required = true, 
+      type = String
+    }
+  },
+  */
+  user: {
+    required: true,
+    type: Schema.Types.ObjectId,
+    ref: "User",
   },
 });
 

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userModel = require("../models/users");
+const { validateCPF } = require("../utils/cpf");
 const mongoose = require("mongoose");
 const { sign, verify } = require("../utils/jwt");
 const { generateHashPassword } = require("../utils/hash");
