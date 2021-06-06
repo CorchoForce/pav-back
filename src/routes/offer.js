@@ -73,7 +73,7 @@ router.get("/:offerId", (req, res, next) => {
 router.put("/:offerId", authenticate, (req, res, next) => {
   const user = req.authUser;
   offer = offerModel
-    .findOneAndUpdate({ _id: req.params.offerId, user: user.__id }, req.body, {
+    .findOneAndUpdate({ _id: req.params.offerId, user: user._id }, req.body, {
       new: true,
     })
     .exec();
@@ -97,7 +97,7 @@ router.put("/:offerId", authenticate, (req, res, next) => {
 router.delete("/:offerId", authenticate, (req, res, next) => {
   user = req.authUser;
   offer = offerModel
-    .findOneAndDelete({ _id: req.params.offerId, user: user.__id })
+    .findOneAndDelete({ _id: req.params.offerId, user: user._id })
     .exec();
   offer
     .then((offer) => {
