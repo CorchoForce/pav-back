@@ -6,6 +6,7 @@ const { sign } = require("../../utils/jwt");
 const createUser = async () => {
   const body = {
     name: "alou",
+    verified: true,
     email: "pedsadro@oprdepr.com",
     CPF: "905.147.470-99",
     password: {
