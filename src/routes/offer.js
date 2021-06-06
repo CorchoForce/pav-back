@@ -34,7 +34,9 @@ router.get("/search", (req, res, next) => {
 });
 
 router.get("/", (req, res, next) => {
-  const baseQuery = { $and :[{deadline: {$gte: new Date().toISOString()}}, {valid: true}]}
+  const baseQuery = {
+    $and: [{ deadline: { $gte: new Date().toISOString() } }, { valid: true }],
+  };
   const query =
     req.query.search === undefined
       ? baseQuery
@@ -71,7 +73,9 @@ router.get("/:offerId", (req, res, next) => {
 router.put("/:offerId", authenticate, (req, res, next) => {
   const user = req.authUser;
   offer = offerModel
-    .findOneAndUpdate({ _id: req.params.offerId, user: user._id }, req.body, { new: true })
+    .findOneAndUpdate({ _id: req.params.offerId, user: user._id }, req.body, {
+      new: true,
+    })
     .exec();
   offer
     .then((offer) => {
@@ -92,8 +96,9 @@ router.put("/:offerId", authenticate, (req, res, next) => {
 
 router.delete("/:offerId", authenticate, (req, res, next) => {
   user = req.authUser;
-  offer = offerModel.findOneAndDelete({ _id: req.params.offerId, user: user._id }).exec();
-  
+  offer = offerModel
+    .findOneAndDelete({ _id: req.params.offerId, user: user._id })
+    .exec();
   offer
     .then((offer) => {
       if (offer === null) {

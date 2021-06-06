@@ -8,7 +8,7 @@ const chaiHttp = require("chai-http");
 const { server, end } = require("../../app");
 const should = chai.should();
 const dbMem = require("../../db/memory");
-const { sign } = require("../../utils/jwt")
+const { sign } = require("../../utils/jwt");
 
 let user = {};
 
@@ -25,21 +25,18 @@ after(async () => {
   return end.then((val) => val.close());
 });
 
-
-
 const createUser = async () => {
   const body = {
-    name: "Rodrigo",
-    email: "rpalmeira1999@poli.ufrj.br",
-    CPF: "85519502587",
-    password: {hash: "aaaa", salt: "queblz"},
-    
+    name: "Rodrigoasd",
+    email: "pedro34@poli.ufrj.br",
+    CPF: "056.947.110-92",
+    password: { hash: "aaaa", salt: "queblz" },
   };
 
   return new userModel(body)
     .save()
     .then((user) => {
-      return ({ ...user, token: sign(user) })
+      return { ...user, token: sign(user) };
     })
     .catch((err) => {
       throw err;
@@ -47,26 +44,23 @@ const createUser = async () => {
 };
 
 const body = () => {
-  return (
-    {
-      title: "Estágio boladão 356",
-      type: "Estágio",
-      requirements: "Ciclo Básico completo",
-      valid: true,
-      site: "www.ufr.br",
-      tags: ["Estágio", "Boladão"],
-      description:
-        "Vivamus ultricies quis orci ut sodales. Quisque maximus quis diam eget lobortis. Sed rutrum porttitor urna, at pulvinar orci accumsan eget. Donec congue elit tellus, varius tincidunt nisi laoreet at. Aliquam ut auctor lorem. Proin arcu nisl, dapibus ut finibus semper, dignissim quis massa. Donec pellentesque dignissim ligula et placerat. ",
-      deadline: Date.parse("2100-01-01"),
-      pay: 300,
-      beginningDate: Date.now(),
-      localization: "CT",
-      neededHours: 8,
-      contactEmail: "email@email.com",
-      user: user._doc._id
-    }
-  )
-  
+  return {
+    title: "Estágio boladão 356",
+    type: "Estágio",
+    requirements: "Ciclo Básico completo",
+    valid: true,
+    site: "www.ufr.br",
+    tags: ["Estágio", "Boladão"],
+    description:
+      "Vivamus ultricies quis orci ut sodales. Quisque maximus quis diam eget lobortis. Sed rutrum porttitor urna, at pulvinar orci accumsan eget. Donec congue elit tellus, varius tincidunt nisi laoreet at. Aliquam ut auctor lorem. Proin arcu nisl, dapibus ut finibus semper, dignissim quis massa. Donec pellentesque dignissim ligula et placerat. ",
+    deadline: Date.parse("2100-01-01"),
+    pay: 300,
+    beginningDate: Date.now(),
+    localization: "CT",
+    neededHours: 8,
+    contactEmail: "email@email.com",
+    user: user._doc._id,
+  };
 };
 
 describe("Offers", () => {
@@ -107,7 +101,7 @@ describe("Offers", () => {
       chai
         .request(server)
         .post("/offer")
-        .set("Authorization", "Bearer "+user.token)
+        .set("Authorization", "Bearer " + user.token)
         .send(body())
         .end((err, res) => {
           res.should.have.status(201);
@@ -147,7 +141,7 @@ describe("Offers", () => {
         chai
           .request(server)
           .put("/offer/" + offer.id)
-          .set("Authorization", "Bearer "+user.token)
+          .set("Authorization", "Bearer " + user.token)
           .send(change)
           .end((err, res) => {
             res.should.have.status(200);
@@ -170,7 +164,7 @@ describe("Offers", () => {
         chai
           .request(server)
           .delete("/offer/" + offer.id)
-          .set("Authorization", "Bearer "+user.token)
+          .set("Authorization", "Bearer " + user.token)
           .end((err, res) => {
             res.should.have.status(204);
             res.body.should.be.a("object");

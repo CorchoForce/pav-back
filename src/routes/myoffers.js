@@ -5,15 +5,15 @@ const router = express.Router();
 const authenticate = require("../middlewares/authenticate");
 
 router.get("/", authenticate, (req, res, next) => {
-    user = req.authUser;
-    offers = offerModel.find({ "user": user._id }).exec();
-    offers
-        .then((offers) => {
-            res.json(offers);
-        })
-        .catch((err) => {
-            throw err;
-        });
+  user = req.authUser;
+  offers = offerModel.find({ user: user._id }).exec();
+  offers
+    .then((offers) => {
+      res.json(offers);
+    })
+    .catch((err) => {
+      throw err;
+    });
 });
 
 module.exports = { url: "/myoffers", router };
