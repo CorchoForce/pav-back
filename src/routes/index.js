@@ -50,12 +50,12 @@ router.post("/login", (req, res, next) => {
         res.status(422).json({ message: "Email não cadastrado" });
         return;
       }
-
-      if (user.verified = false){
+      console.log(user.verified)
+      if (user.verified === false){
         res.status(403).json({message: "Usuário não verificado"});
         return;
       }
-      
+
       const input_password = generateHashPassword(
         req.body.password,
         user.password.salt
