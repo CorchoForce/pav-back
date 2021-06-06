@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const authenticate = require("../middlewares/authenticate");
+const { canDelete, canUpdate } = require("../services/permissions/offer");
 
 router.post("/", authenticate, (req, res, next) => {
   const user = req.authUser;
@@ -73,48 +74,53 @@ router.get("/:offerId", (req, res, next) => {
 router.put("/:offerId", authenticate, (req, res, next) => {
   const user = req.authUser;
   offer = offerModel
-    .findOneAndUpdate({ _id: req.params.offerId, user: user._id }, req.body, {
+    .findOneAndUpdate({ _id: req.params.offerId }, req.body, {
       new: true,
     })
     .exec();
-  offer
-    .then((offer) => {
-      if (offer === null) {
-        res.status(404).json({});
-        return;
-      }
-      res.json(offer);
-    })
-    .catch((err) => {
-      if (err instanceof mongoose.Error.CastError) {
-        res.status(400).send({ error: "Id incorreta" });
-      } else {
-        next(err);
-      }
-    });
+  if (!canUpdate(user, offer)) {
+    res.status(401).json({ message: "Permissão negada" });
+  } else {
+    offer
+      .then((offer) => {
+        if (offer === null) {
+          res.status(404).json({});
+          return;
+        }
+        res.json(offer);
+      })
+      .catch((err) => {
+        if (err instanceof mongoose.Error.CastError) {
+          res.status(400).send({ error: "Id incorreta" });
+        } else {
+          next(err);
+        }
+      });
+  }
 });
 
 router.delete("/:offerId", authenticate, (req, res, next) => {
   user = req.authUser;
-  offer = offerModel
-    .findOneAndDelete({ _id: req.params.offerId, user: user._id })
-    .exec();
-
-  offer
-    .then((offer) => {
-      if (offer === null) {
-        res.status(404).json({});
-        return;
-      }
-      res.status(204).send();
-    })
-    .catch((err) => {
-      if (err instanceof mongoose.Error.CastError) {
-        res.status(400).send({ error: "Id incorreta" });
-      } else {
-        next(err);
-      }
-    });
+  offer = offerModel.findOneAndDelete({ _id: req.params.offerId }).exec();
+  if (!canDelete(user, offer)) {
+    res.status(401).json({ message: "Permissão negada" });
+  } else {
+    offer
+      .then((offer) => {
+        if (offer === null) {
+          res.status(404).json({});
+          return;
+        }
+        res.status(204).send();
+      })
+      .catch((err) => {
+        if (err instanceof mongoose.Error.CastError) {
+          res.status(400).send({ error: "Id incorreta" });
+        } else {
+          next(err);
+        }
+      });
+  }
 });
 
 module.exports = { url: "/offer", router };

@@ -20,7 +20,7 @@ router.post("/test", (req, res) => {
 //validate e reuuired error
 router.post("/register", (req, res, next) => {
   try {
-    validateUser(req.body, { ...validator, cpfValidator: (s) => true });
+    validateUser(req.body, { ...validator, cpfValidator: validateCPF });
     const newUser = req.body;
     newUser.password = generateHashPassword(newUser.password);
     const user = new userModel(newUser);
@@ -32,7 +32,7 @@ router.post("/register", (req, res, next) => {
       })
       .catch((err) => {
         if (err instanceof mongoose.mongo.MongoError && err.code === 11000) {
-          res.status(422).json({ message: "Email já registrado" });
+          res.status(422).json({ message: "Email ou CPF já registrado" });
         } else {
           next(err);
         }
