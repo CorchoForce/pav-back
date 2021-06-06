@@ -27,6 +27,7 @@ describe("Autentication ", () => {
     email: "pedro@poli.ufrj.br",
     CPF: "905.147.470-99",
     password: "123mudar",
+    verified:true
   };
 
   it("it should register a user", (done) => {

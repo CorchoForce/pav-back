@@ -29,6 +29,7 @@ router.post("/register", (req, res, next) => {
       .save()
       .then((user) => {
         sendEmail(res, user);
+        res.status(200).json({ message: "Email enviado" });
       })
       .catch((err) => {
         if (err instanceof mongoose.mongo.MongoError && err.code === 11000) {
