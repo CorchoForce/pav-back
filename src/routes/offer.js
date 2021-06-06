@@ -74,53 +74,47 @@ router.get("/:offerId", (req, res, next) => {
 router.put("/:offerId", authenticate, (req, res, next) => {
   const user = req.authUser;
   offer = offerModel
-    .findOneAndUpdate({ _id: req.params.offerId }, req.body, {
+    .findOneAndUpdate({ _id: req.params.offerId, user: user.__id }, req.body, {
       new: true,
     })
     .exec();
-  if (!canUpdate(user, offer)) {
-    res.status(401).json({ message: "Permissão negada" });
-  } else {
-    offer
-      .then((offer) => {
-        if (offer === null) {
-          res.status(404).json({});
-          return;
-        }
-        res.json(offer);
-      })
-      .catch((err) => {
-        if (err instanceof mongoose.Error.CastError) {
-          res.status(400).send({ error: "Id incorreta" });
-        } else {
-          next(err);
-        }
-      });
-  }
+  offer
+    .then((offer) => {
+      if (offer === null) {
+        res.status(404).json({});
+        return;
+      }
+      res.json(offer);
+    })
+    .catch((err) => {
+      if (err instanceof mongoose.Error.CastError) {
+        res.status(400).send({ error: "Id incorreta" });
+      } else {
+        next(err);
+      }
+    });
 });
 
 router.delete("/:offerId", authenticate, (req, res, next) => {
   user = req.authUser;
-  offer = offerModel.findOneAndDelete({ _id: req.params.offerId }).exec();
-  if (!canDelete(user, offer)) {
-    res.status(401).json({ message: "Permissão negada" });
-  } else {
-    offer
-      .then((offer) => {
-        if (offer === null) {
-          res.status(404).json({});
-          return;
-        }
-        res.status(204).send();
-      })
-      .catch((err) => {
-        if (err instanceof mongoose.Error.CastError) {
-          res.status(400).send({ error: "Id incorreta" });
-        } else {
-          next(err);
-        }
-      });
-  }
+  offer = offerModel
+    .findOneAndDelete({ _id: req.params.offerId, user: user.__id })
+    .exec();
+  offer
+    .then((offer) => {
+      if (offer === null) {
+        res.status(404).json({});
+        return;
+      }
+      res.status(204).send();
+    })
+    .catch((err) => {
+      if (err instanceof mongoose.Error.CastError) {
+        res.status(400).send({ error: "Id incorreta" });
+      } else {
+        next(err);
+      }
+    });
 });
 
 module.exports = { url: "/offer", router };

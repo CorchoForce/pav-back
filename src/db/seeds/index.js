@@ -6,8 +6,8 @@ const { sign } = require("../../utils/jwt");
 const createUser = async () => {
   const body = {
     name: "alou",
-    email: "pedro@oprdepr.com",
-    CPF: "85519502587",
+    email: "pedsadro@oprdepr.com",
+    CPF: "905.147.470-99",
     password: {
       hash:
         "41c3ff0d5d32f379d4c7e06292f0a115731bd93f37f0c83e3f7521eb5b99e6ba0fbe9acc036a8e5a9e8daa88e1dbd40c09327f2c1d6882599213b3591aa55245",
@@ -210,16 +210,16 @@ const seedOffers = (user_id) => {
 let user = {};
 
 const promise = async () => {
-  new Promise(async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     if (c.isProduction() || process.env.NODE_ENV === "test") resolve();
     else {
-      user = await createUser();
-      const user_id = user._doc._id;
-      offerModel
+      userModel
         .findOne({})
         .exec()
-        .then((offers) => {
-          if (offers === null) {
+        .then(async (user) => {
+          if (user === null) {
+            user = await createUser();
+            const user_id = user._doc._id;
             offerModel.insertMany(seedOffers(user_id));
           }
           resolve();
