@@ -26,13 +26,13 @@ router.post('/verify', authenticate, (req, res, next) =>{
   user
     .then((user) => {
       if (user === null) {
-        res.status(422).json({ message: "Usuário já foi verificado :(" });
+        res.status(422).json({ message: "Usuário já foi verificado" });
         return;
       }
       userModel.findOneAndUpdate({ $and: [{ _id: user._id }, { verified: false }] }, {verified:true})
         .exec();
 
-      res.status(200).send("Usuário acabou de ser verificado :)");
+      res.status(200).send("Usuário acabou de ser verificado");
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
