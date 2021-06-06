@@ -24,8 +24,8 @@ after(async () => {
 describe("Autentication ", () => {
   const body = {
     name: "Rodrigo",
-    email: "rpalmeira1999@poli.ufrj.br",
-    CPF: "85519502587",
+    email: "pedroo@poli.ufrj.br",
+    CPF: "855.195.025-87",
     password: "123mudar",
   };
 
@@ -59,7 +59,7 @@ describe("Autentication ", () => {
       .end((err, res) => {
         res.should.have.status(422);
         res.body.should.be.a("object");
-        res.body.message.should.be.eql("Email já registrado");
+        res.body.message.should.be.eql("CPF ou Email já registrado");
         done();
       });
   });
