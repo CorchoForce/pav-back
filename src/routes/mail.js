@@ -190,7 +190,7 @@ router.get('/send', (req, res, next) => {
       if (error) {
         throw error
       } else {
-        res.status(200).send(response.message);
+        res.status(200).json({ message: "Email acabou de ser enviado" });
       }
     });
   })
