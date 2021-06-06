@@ -175,7 +175,9 @@ const sendEmail = (res, user) => {
     smtpTransport.sendMail(mailOptions, (error) => {
         if (error) {
             res.status(418).json({message: "Erro inesperado ao enviar o email de confirmação."})        
-        } 
+        } else {
+            res.status(200).json({ message: "Email enviado" });
+        }
     });
 }
 

@@ -6,7 +6,7 @@ const sendEmail = require("../utils/sendEmail");
 const authenticate = require("../middlewares/authenticate");
 
 router.post('/send', (req, res, next) => {
-  const user = userModel.findOne({$and:[{email: req.query.email}, {verified: false}]}).exec();
+  const user = userModel.findOne({ $and: [{ email: req.body.email }, { verified: false }] }).exec();
   user
   .then((user) => {
     sendEmail(res, user);
@@ -21,18 +21,16 @@ router.post('/send', (req, res, next) => {
    
 });
 
-router.post('/verify', authenticate, (req, res, next) =>{
+router.post('/verify', authenticate, (req, res, next) => {
   const user = req.authUser;
-  user
-    .then((user) => {
-      if (user === null) {
-        res.status(422).json({ message: "Usuário já foi verificado" });
-        return;
-      }
-      userModel.findOneAndUpdate({ $and: [{ _id: user._id }, { verified: false }] }, {verified:true})
-        .exec();
+  if (user === null) {
+    return (res.status(400).json({ message: "Usuário não encontrado." }));
+  }
 
-      res.status(200).send("Usuário acabou de ser verificado");
+  const updatedUser = userModel.findOneAndUpdate({ $and: [{ _id: user._id }, { verified: false }] }, { verified : true }).exec();
+  updatedUser
+    .then(() => {
+      res.status(200).send("Usuário verificado.");
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
