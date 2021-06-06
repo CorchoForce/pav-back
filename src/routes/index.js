@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const { sign, verify } = require("../utils/jwt");
 const { generateHashPassword } = require("../utils/hash");
 const authenticate = require("../middlewares/authenticate");
+const validator = require("validator");
+const validateUser = require("../services/validation/user");
 
 router.get("/", (req, res) => {
   res.json({ message: "Hello World\n" });
@@ -16,22 +18,27 @@ router.post("/test", (req, res) => {
 
 //validate e reuuired error
 router.post("/register", (req, res, next) => {
-  const newUser = req.body;
-  newUser.password = generateHashPassword(newUser.password);
-  const user = new userModel(newUser);
-  user
-    .save()
-    .then((user) => {
-      const token = sign(user);
-      res.status(201).json({ user, token: token });
-    })
-    .catch((err) => {
-      if (err instanceof mongoose.mongo.MongoError && err.code === 11000) {
-        res.status(422).json({ message: "Email já registrado" });
-      } else {
-        next(err);
-      }
-    });
+  try {
+    validateUser(req.body, { ...validator, cpfValidator: (s) => true });
+    const newUser = req.body;
+    newUser.password = generateHashPassword(newUser.password);
+    const user = new userModel(newUser);
+    user
+      .save()
+      .then((user) => {
+        const token = sign(user);
+        res.status(201).json({ user, token: token });
+      })
+      .catch((err) => {
+        if (err instanceof mongoose.mongo.MongoError && err.code === 11000) {
+          res.status(422).json({ message: "Email já registrado" });
+        } else {
+          next(err);
+        }
+      });
+  } catch (error) {
+    res.status(422).json({ message: error });
+  }
 });
 
 router.post("/login", (req, res, next) => {
