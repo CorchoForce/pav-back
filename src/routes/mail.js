@@ -1,6 +1,8 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
 const router = express.Router();
+const userModel = require("../models/users");
+const mongoose = require("mongoose");
 
 const smtpTransport = nodemailer.createTransport({
     service: "Gmail",
@@ -15,13 +17,20 @@ router.get('/', (req, res) => {
     res.json({'confirmation':true});
 });
 
-router.get('/send', (req, res) => {
-    rand = Math.floor((Math.random() * 100) + 54);
+router.get('/send', (req, res, next) => {
+  const user = userModel.findOne({$and:[{_id: req.query.id}, {verified: false}]}).exec();
+  user
+  .then((user) => {
+    if (user === null) {
+      res.status(422).json({ message: "Usuário já foi verificado" });
+      return;
+    }
+
     host = req.get('host');
-    link = "http://" + req.get('host') + "/verify?id=" + rand;
+    link = "http://" + req.get('host') + "/mail/verify?id=" + user._id;
     mailOptions = {
-        to: "bruno.d.paiva@hotmail.com",
-        subject: "Bem vindo ao Pega a Visão. Por favor confirme seu email",
+      to: user.email,
+      subject: "Bem vindo ao Pega a Visão. Por favor confirme seu email",
       html: `<!DOCTYPE html>
             <html lang="pt-BR" style="height: 100%; position: relative;">
 
@@ -34,11 +43,11 @@ router.get('/send', (req, res) => {
                 class="kt-woo-wrap order-items-normal k-responsive-normal title-style-below email-id-customer_new_account"
                 style="height: 100%; position: relative; background-color: #fff7f7; margin: 0; padding: 0;">
                 <div id="wrapper" dir="ltr"
-                    style="background-color: #fff7f7; margin: 0; padding: 70px 0 70px 0; width: 100%; padding-top: 0px; padding-bottom: 0px; -webkit-text-size-adjust: none;">
+                    style="background-color: #F6F0E7; margin: 0; padding: 70px 0 70px 0; width: 100%; padding-top: 0px; padding-bottom: 0px; -webkit-text-size-adjust: none;">
                     <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
                         <tr>
                             <td align="center" valign="top">
-                                <table id="template_header_image_container" style="width: 100%; background-color: #fff7f7;">
+                                <table id="template_header_image_container" style="width: 100%; background-color: #dfd9d1;">
                                     <tr id="template_header_image">
                                         <td align="center" valign="middle">
                                             <table border="0" cellpadding="0" cellspacing="0" width="100%"
@@ -48,7 +57,7 @@ router.get('/send', (req, res) => {
                                                         style="text-align: center; padding-top: 25px; padding-bottom: 25px;">
                                                         <p style="margin-bottom: 0; margin-top: 0;">
                                                             <a href="https://pav-front-stage.herokuapp.com" target="_blank"
-                                                                style="font-weight: normal; color: #1e73be; display: block; text-decoration: none;">
+                                                                style="font-weight: normal; color: #0B5471; display: block; text-decoration: none;">
                                                                 <img src="https://cdn.discordapp.com/attachments/539836343094870016/851139325483155476/navbar_logo.png"
                                                                     alt="Símbolo do Pega a Visão" width="160"
                                                                     style="border: none; display: inline; font-weight: bold; height: auto; outline: none; text-decoration: none; text-transform: capitalize; font-size: 14px; line-height: 24px; width: 100%; max-width: 160px;">
@@ -101,7 +110,7 @@ router.get('/send', (req, res) => {
                                                                             <p style="margin: 0 0 16px;">Para que sua conta seja criada com sucesso, precisamos que você confirme seu email.</p>
                                                                             <p style="margin: 0 0 16px;"> </p>
                                                                             <p style="margin: 0 0 16px;">Para isso, basta clicar no link abaixo: </p>
-                                                                            <a href="teste" rel="nofollow">Clique Aqui</a>
+                                                                            <a href=`+ link + ` rel="nofollow">Clique Aqui</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -175,20 +184,46 @@ router.get('/send', (req, res) => {
                     </table>
                 </div>
             </body>
-
             </html>`
     }
     smtpTransport.sendMail(mailOptions, (error, response) => {
-        if (error) {
-            throw error
-        } else {
-            res.status(200).send(response.message);
-        }
+      if (error) {
+        throw error
+      } else {
+        res.status(200).send(response.message);
+      }
     });
+  })
+  .catch((err) => {
+    if (err instanceof mongoose.Error.CastError) {
+      res.status(400).send({ error: "Id incorreta" });
+    } else{
+      next(err);
+    }
+  });
+   
 });
 
-router.get('/verify', (req, res) =>{
+router.get('/verify', (req, res, next) =>{
+  const user = userModel.findOne({ $and: [{ _id: req.query.id }, { verified: false }] }).exec();
+  user
+    .then((user) => {
+      if (user === null) {
+        res.status(422).json({ message: "Usuário já foi verificado :(" });
+        return;
+      }
+      userModel.findOneAndUpdate({ $and: [{ _id: req.query.id }, { verified: false }] }, {verified:true})
+        .exec();
 
+      res.status(200).send("Usuário acabou de ser verificado :)");
+    })
+    .catch((err) => {
+      if (err instanceof mongoose.Error.CastError) {
+        res.status(400).send({ error: "Id incorreta" });
+      } else {
+        next(err);
+      }
+    });
 });
 
 module.exports = { url: "/mail", router };
