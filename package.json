@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "test": "mocha ./src/tests/*",
+    "test": "mocha ./src/tests/* --recursive",
     "prepare": "husky install"
   },
   "author": "",
