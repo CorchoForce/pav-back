@@ -17,7 +17,7 @@ router.post("/test", (req, res) => {
   res.json(req.body);
 });
 
-//validate e reuuired error
+//validate e required error
 router.post("/register", (req, res, next) => {
   try {
     validateUser(req.body, { ...validator, cpfValidator: validateCPF });
@@ -27,8 +27,7 @@ router.post("/register", (req, res, next) => {
     user
       .save()
       .then((user) => {
-        const token = sign(user);
-        res.status(201).json({ user, token: token });
+        res.status(403).json({ user, message:"É necessário confirmar o email antes." });
       })
       .catch((err) => {
         if (err instanceof mongoose.mongo.MongoError && err.code === 11000) {
@@ -50,7 +49,7 @@ router.post("/login", (req, res, next) => {
         res.status(422).json({ message: "Email não cadastrado" });
         return;
       }
-      console.log(user.verified)
+
       if (user.verified === false){
         res.status(403).json({message: "Usuário não verificado"});
         return;
