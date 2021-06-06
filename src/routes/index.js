@@ -8,6 +8,7 @@ const { generateHashPassword } = require("../utils/hash");
 const authenticate = require("../middlewares/authenticate");
 const validator = require("validator");
 const validateUser = require("../services/validation/user");
+const sendEmail = require("../utils/sendEmail");
 
 router.get("/", (req, res) => {
   res.json({ message: "Hello World\n" });
@@ -27,7 +28,7 @@ router.post("/register", (req, res, next) => {
     user
       .save()
       .then((user) => {
-        res.status(403).json({ user, message:"É necessário confirmar o email antes." });
+        sendEmail(res, user);
       })
       .catch((err) => {
         if (err instanceof mongoose.mongo.MongoError && err.code === 11000) {
