@@ -8,16 +8,9 @@ const { generateHashPassword } = require("../utils/hash");
 const authenticate = require("../middlewares/authenticate");
 const validator = require("validator");
 const validateUser = require("../services/validation/user");
+const sendEmail = require("../utils/sendEmail");
 
-router.get("/", (req, res) => {
-  res.json({ message: "Hello World\n" });
-});
-
-router.post("/test", (req, res) => {
-  res.json(req.body);
-});
-
-//validate e reuuired error
+//validate e required error
 router.post("/register", (req, res, next) => {
   try {
     validateUser(req.body, { ...validator, cpfValidator: validateCPF });
@@ -27,8 +20,7 @@ router.post("/register", (req, res, next) => {
     user
       .save()
       .then((user) => {
-        const token = sign(user);
-        res.status(201).json({ user, token: token });
+        sendEmail(res, user);
       })
       .catch((err) => {
         if (err instanceof mongoose.mongo.MongoError && err.code === 11000) {
@@ -43,6 +35,7 @@ router.post("/register", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
+  
   user = userModel.findOne({ email: req.body.email }).exec();
   user
     .then((user) => {
@@ -50,6 +43,12 @@ router.post("/login", (req, res, next) => {
         res.status(422).json({ message: "Email não cadastrado" });
         return;
       }
+
+      if (user.verified === false){
+        res.status(403).json({message: "Usuário não verificado"});
+        return;
+      }
+
       const input_password = generateHashPassword(
         req.body.password,
         user.password.salt
