@@ -11,6 +11,11 @@ const smtpTransport = nodemailer.createTransport({
 });
 
 const sendEmail = (res, user) => {
+    if(process.env.NODE_ENV ==="test"){
+        res.status(200).json({ message: "Email enviado" });
+        return;
+    }
+
     const token = jwt.sign(user, '1h');
 
     link = process.env['FRONT_URL'] + "/verify_email?token=" + token;
