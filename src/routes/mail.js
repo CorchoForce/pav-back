@@ -4,6 +4,7 @@ const userModel = require("../models/users");
 const mongoose = require("mongoose");
 const sendEmail = require("../utils/sendEmail");
 const authenticate = require("../middlewares/authenticate");
+const { restart } = require("nodemon");
 
 router.post('/send', (req, res, next) => {
   const user = userModel.findOne({ $and: [{ email: req.body.email }, { verified: false }] }).exec();
@@ -13,7 +14,7 @@ router.post('/send', (req, res, next) => {
   })
   .catch((err) => {
     if (err instanceof mongoose.Error.CastError) {
-      res.status(400).send({ error: "Email incorreto" });
+      res.status(400).json({ error: "Email incorreto" });
     } else{
       next(err);
     }
@@ -23,21 +24,17 @@ router.post('/send', (req, res, next) => {
 
 router.post('/verify', authenticate, (req, res, next) => {
   const user = req.authUser;
-  if (user === null) {
-    return (res.status(400).json({ message: "Usuário não encontrado." }));
-  }
-
-  const updatedUser = userModel.findOneAndUpdate({ $and: [{ _id: user._id }, { verified: false }] }, { verified : true }).exec();
+  const updatedUser = userModel.findOneAndUpdate({ $and: [{ _id: user._id }, { verified: false }] }, { verified : true }, {new:true}).exec();
   updatedUser
-    .then(() => {
-      res.status(200).send("Usuário verificado.");
+    .then((user) => {
+      if(user === null){
+        res.status(422).json({ message: "Usuário já verificado" })
+      }else{
+        res.status(200).json({ message: "Usuário verificado." });
+      }
     })
     .catch((err) => {
-      if (err instanceof mongoose.Error.CastError) {
-        res.status(400).send({ error: "Usuário não encontrado" });
-      } else {
-        next(err);
-      }
+      next(err);
     });
 });
 
