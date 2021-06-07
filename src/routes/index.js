@@ -10,14 +10,6 @@ const validator = require("validator");
 const validateUser = require("../services/validation/user");
 const sendEmail = require("../utils/sendEmail");
 
-router.get("/", (req, res) => {
-  res.json({ message: "Hello World\n" });
-});
-
-router.post("/test", (req, res) => {
-  res.json(req.body);
-});
-
 //validate e required error
 router.post("/register", (req, res, next) => {
   try {
@@ -43,6 +35,7 @@ router.post("/register", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
+  
   user = userModel.findOne({ email: req.body.email }).exec();
   user
     .then((user) => {
