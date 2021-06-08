@@ -33,6 +33,7 @@ jobs:
       - name: Run Unit Tests
         run: npm run test
         env:
+          CI: true
           APP_KEY: ${{ secrets.APP_KEY }}
           FRONT_URL: ${{ secrets.FRONT_URL }}
           MONGO_DB: ${{ secrets.MONGO_DB }}
