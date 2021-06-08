@@ -7,8 +7,7 @@ on:
   push:
     branches: [ main, stage ]
   pull_request_target:
-    branches: [ main, stage ]
-    types: [assigned, opened, synchronize, reopened]
+    types: [edited, opened, reopened]
 
 jobs:
   build:
