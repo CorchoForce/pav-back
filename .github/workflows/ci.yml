@@ -32,15 +32,15 @@ jobs:
 
       - name: Run Unit Tests
         run: |
-          touch.env
-          APP_KEY: ${{ secrets.APP_KEY }} >> .env
-          FRONT_URL: ${{ secrets.FRONT_URL }} >> .env
-          MONGO_DB: ${{ secrets.MONGO_DB }} >> .env
-          MONGO_HOSTNAME: ${{ secrets.MONGO_HOSTNAME }} >> .env
-          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }} >> .env
-          MONGO_PORT: ${{ secrets.MONGO_PORT }} >> .env
-          MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }} >> .env
-          PRODUCTION: "FALSE" >> .env
-          SERVER_PORT: ${{ secrets.SERVER_PORT }} >> .env
-          URL: ${{ secrets.URL }} >> .env
+          touch .env
+          echo 'APP_KEY: ${{ secrets.APP_KEY }}' >> .env
+          echo 'FRONT_URL: ${{ secrets.FRONT_URL }}' >> .env
+          echo 'MONGO_DB: ${{ secrets.MONGO_DB }} >>' .env
+          echo 'MONGO_HOSTNAME: ${{ secrets.MONGO_HOSTNAME }}' >> .env
+          echo 'MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}' >> .env
+          echo 'MONGO_PORT: ${{ secrets.MONGO_PORT }}' >> .env
+          echo 'MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }}' >> .env
+          echo 'PRODUCTION: "FALSE"' >> .env
+          echo 'SERVER_PORT: ${{ secrets.SERVER_PORT }}' >> .env
+          echo 'URL: ${{ secrets.URL }}' >> .env
           npm run test
