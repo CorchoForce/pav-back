@@ -33,12 +33,13 @@ jobs:
       - name: Run Unit Tests
         run: npm run test
         env:
-          APP_KEY: 'test_key'
-          MONGO_DB: 'db_tes'
-          MONGO_HOSTNAME: 'test_host'
-          MONGO_PASSWORD: 'test_password'
-          MONGO_PORT: '27017'
-          MONGO_USERNAME: 'test'
+          APP_KEY: ${{ secrets.APP_KEY }}
+          FRONT_URL: ${{ secrets.FRONT_URL }}
+          MONGO_DB: ${{ secrets.MONGO_DB }}
+          MONGO_HOSTNAME: ${{ secrets.MONGO_HOSTNAME }}
+          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+          MONGO_PORT: ${{ secrets.MONGO_PORT }}
+          MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }}
           PRODUCTION: "FALSE"
-          SERVER_PORT: '8080'
-          URL: 'localhost:8080'
+          SERVER_PORT: ${{ secrets.SERVER_PORT }}
+          URL: ${{ secrets.URL }}
