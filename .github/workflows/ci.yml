@@ -8,6 +8,7 @@ on:
     branches: [ main, stage ]
   pull_request_target:
     branches: [ main, stage ]
+    types: [assigned, opened, synchronize, reopened]
 
 jobs:
   build:
