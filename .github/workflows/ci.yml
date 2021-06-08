@@ -32,7 +32,7 @@ jobs:
         run: npm ci
 
       - name: Run Unit Tests
-        run: npm run test
+        run: npm test
         env:
           APP_KEY: ${{ secrets.APP_KEY }}
           FRONT_URL: ${{ secrets.FRONT_URL }}
