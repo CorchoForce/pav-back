@@ -52,7 +52,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.get("/:offerId", (req, res, next) => {
-  offer = offerModel.findOne({ $and: [{ _id: req.params.offerId }, { valid: true }]}).exec();
+  offer = offerModel.findOne({ _id: req.params.offerId }).exec();
   offer
     .then((offer) => {
       if (offer === null) {
