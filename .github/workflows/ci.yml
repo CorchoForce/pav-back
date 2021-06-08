@@ -4,8 +4,10 @@
 name: Node.js CI
 
 on:
-  pull_request_target:
-    types: [edited, opened, reopened]
+  push:
+    branches: [ main, stage ]
+  pull_request:
+    branches: [ main, stage ]
 
 jobs:
   build:
@@ -30,8 +32,7 @@ jobs:
 
       - name: Run Unit Tests
         run: npm run test
-        env:
-          CI: true
+        with:
           APP_KEY: ${{ secrets.APP_KEY }}
           FRONT_URL: ${{ secrets.FRONT_URL }}
           MONGO_DB: ${{ secrets.MONGO_DB }}
