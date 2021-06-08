@@ -31,16 +31,16 @@ jobs:
         run: npm ci
 
       - name: Run Unit Tests
-        run: npm run test
-        env:
-          CI: true
-          APP_KEY: ${{ secrets.APP_KEY }}
-          FRONT_URL: ${{ secrets.FRONT_URL }}
-          MONGO_DB: ${{ secrets.MONGO_DB }}
-          MONGO_HOSTNAME: ${{ secrets.MONGO_HOSTNAME }}
-          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
-          MONGO_PORT: ${{ secrets.MONGO_PORT }}
-          MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }}
-          PRODUCTION: "FALSE"
-          SERVER_PORT: ${{ secrets.SERVER_PORT }}
-          URL: ${{ secrets.URL }}
+        run: |
+          touch.env
+          APP_KEY: ${{ secrets.APP_KEY }} >> .env
+          FRONT_URL: ${{ secrets.FRONT_URL }} >> .env
+          MONGO_DB: ${{ secrets.MONGO_DB }} >> .env
+          MONGO_HOSTNAME: ${{ secrets.MONGO_HOSTNAME }} >> .env
+          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }} >> .env
+          MONGO_PORT: ${{ secrets.MONGO_PORT }} >> .env
+          MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }} >> .env
+          PRODUCTION: "FALSE" >> .env
+          SERVER_PORT: ${{ secrets.SERVER_PORT }} >> .env
+          URL: ${{ secrets.URL }} >> .env
+          npm run test
