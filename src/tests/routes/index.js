@@ -26,7 +26,7 @@ const body = {
   CPF: "905.147.470-99",
   password: "teste",
   createdAt: Date.now(),
-  college: "UFRJ",
+  institution: "UFRJ",
   verified: false,
 };
 
@@ -38,7 +38,7 @@ const body2 = {
     hash: 'b2b6a994510f3c1a0f40b69cb7bf4f9aa52f0ba07894ea0a27e6f5c262bec507fc4b272722d75374be04a021f553572f07b9c44df4fdcf0d1ceb09792a978f2b',
     salt: '549747ddb35175ae3f603ed7b4ce1e08', },
   createdAt: Date.now(),
-  college: "UFRJ",
+  institution: "UFRJ",
   verified: false,
 }
 
@@ -51,7 +51,7 @@ const body3 = {
     salt: '549747ddb35175ae3f603ed7b4ce1e08',
   },
   createdAt: Date.now(),
-  college: "UFRJ",
+  institution: "UFRJ",
   verified: true,
 }
 
