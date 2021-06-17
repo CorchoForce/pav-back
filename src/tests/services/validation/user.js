@@ -69,14 +69,13 @@ describe("Regras de Validação Usuário ", () => {
     email: "meira",
     CPF: "905.147.470-99",
     createdAt: Date.now(),
-    college: "UFRJ",
   };
   it("Deve Recusar o Usuário por tudo", (done) => {
     try {
       validateUser(body5, { ...validator, cpfValidator: () => false });
     } catch (e) {
       e.should.be.eql(
-        "Nome é inválido\nEmail é inválido\nA senha é obrigatória\nCPF inválido\n"
+        "Nome é inválido\nEmail é inválido\nA senha é obrigatória\nCPF inválido\nA faculdade é obrigatória\n"
       );
     }
     done();
