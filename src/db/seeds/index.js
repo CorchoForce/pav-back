@@ -14,6 +14,8 @@ const createUser = async () => {
         "41c3ff0d5d32f379d4c7e06292f0a115731bd93f37f0c83e3f7521eb5b99e6ba0fbe9acc036a8e5a9e8daa88e1dbd40c09327f2c1d6882599213b3591aa55245",
       salt: "32468f538c7ed3c4c9bbbebc637a1a88",
     },
+    createdAt: Date.now(),
+    college:"UFRJ",
   };
 
   return new userModel(body)

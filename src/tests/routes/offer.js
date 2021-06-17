@@ -31,6 +31,8 @@ const createUser = async () => {
     email: "pedro34@poli.ufrj.br",
     CPF: "056.947.110-92",
     password: { hash: "aaaa", salt: "queblz" },
+    createdAt: Date.now(),
+    college: "UFRJ",
   };
 
   return new userModel(body)
