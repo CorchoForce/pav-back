@@ -36,7 +36,7 @@ const userSchema = new Schema({
     required:true,
     default:Date.now(),
   },
-  college: {
+  institution: {
     type: String,
     required: true,
   },

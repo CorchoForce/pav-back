@@ -15,7 +15,7 @@ const createUser = async () => {
       salt: "32468f538c7ed3c4c9bbbebc637a1a88",
     },
     createdAt: Date.now(),
-    college:"UFRJ",
+    institution:"UFRJ",
   };
 
   return new userModel(body)
