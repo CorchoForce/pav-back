@@ -31,6 +31,15 @@ const userSchema = new Schema({
     unique: true,
     required: true,
   },
+  createdAt: {
+    type: Date,
+    required:true,
+    default:Date.now(),
+  },
+  college: {
+    type: String,
+    required: true,
+  },
 });
 
 userSchema.methods.toJSON = function () {
