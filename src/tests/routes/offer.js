@@ -32,7 +32,7 @@ const createUser = async () => {
     CPF: "056.947.110-92",
     password: { hash: "aaaa", salt: "queblz" },
     createdAt: Date.now(),
-    college: "UFRJ",
+    institution: "UFRJ",
   };
 
   return new userModel(body)
