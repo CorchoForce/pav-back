@@ -9,6 +9,8 @@ describe("Regras de Validação Usuário ", () => {
     email: "rpalmeira1999@poli.ufrj.br",
     CPF: "905.147.470-99",
     password: "123mudar",
+    createdAt: Date.now(),
+    college: "UFRJ",
   };
   it("Deve Validar o Usuário", (done) => {
     validateUser(body, { ...validator, cpfValidator: () => true });
@@ -19,6 +21,8 @@ describe("Regras de Validação Usuário ", () => {
     email: "rpalmeira1999@poli.ufrj.br",
     CPF: "905.147.470-99",
     password: "123mudar",
+    createdAt: Date.now(),
+    college: "UFRJ",
   };
   it("Deve Recusar o Usuário pelo nome", (done) => {
     try {
@@ -33,6 +37,8 @@ describe("Regras de Validação Usuário ", () => {
     email: "rpalmeira1999",
     CPF: "905.147.470-99",
     password: "123mudar",
+    createdAt: Date.now(),
+    college: "UFRJ",
   };
   it("Deve Recusar o Usuário pelo email", (done) => {
     try {
@@ -47,6 +53,8 @@ describe("Regras de Validação Usuário ", () => {
     email: "meira1999@poli.ufrj.br",
     CPF: "905.147.470-99",
     password: "123mudar",
+    createdAt: Date.now(),
+    college: "UFRJ",
   };
   it("Deve Recusar o Usuário pelo CPF", (done) => {
     try {
@@ -60,13 +68,14 @@ describe("Regras de Validação Usuário ", () => {
     name: "Rodrigo Mendes213",
     email: "meira",
     CPF: "905.147.470-99",
+    createdAt: Date.now(),
   };
   it("Deve Recusar o Usuário por tudo", (done) => {
     try {
       validateUser(body5, { ...validator, cpfValidator: () => false });
     } catch (e) {
       e.should.be.eql(
-        "Nome é inválido\nEmail é inválido\nA senha é obrigatória\nCPF inválido\n"
+        "Nome é inválido\nEmail é inválido\nA senha é obrigatória\nCPF inválido\nA faculdade é obrigatória\n"
       );
     }
     done();
