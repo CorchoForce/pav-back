@@ -19,7 +19,6 @@ const sendPasswordEmail = (res, user) => {
     const token = jwt.sign(user, '1h');
 
     link = process.env['FRONT_URL'] + "/update_password?token=" + token;
-    console.log(link)
     mailOptions = {
         from: smtpTransport.from,
         to: user.email,

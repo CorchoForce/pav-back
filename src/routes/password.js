@@ -27,6 +27,9 @@ router.post('/', (req, res, next) => {
 
 router.put('/', (req, res, next) => {
   const user = req.authUser;
+  if (req.body.password != req.body.confirmation_password){
+    res.status(400).json({ message: "Senhas diferentes"});
+  }
   const updatedUser = userModel.findOneAndUpdate({ _id: user._id }, { password: generateHashPassword(req.body.password) }).exec();
   updatedUser
     .then((user) => {
