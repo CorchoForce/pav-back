@@ -11,7 +11,7 @@ const smtpTransport = nodemailer.createTransport({
 });
 
 const sendPasswordEmail = (res, user) => {
-    if(process.env.NODE_ENV ==="test"){
+    if (process.env.NODE_ENV === "test") {
         res.status(200).json({ message: "Email enviado" });
         return;
     }
@@ -23,7 +23,7 @@ const sendPasswordEmail = (res, user) => {
         from: smtpTransport.from,
         to: user.email,
         subject: "[Pega A Visão] Redefinição de senha",
-        text:`
+        text: `
             Alteração de senha
             Altere sua senha pelo link abaixo. Caso não tenha solicitado uma nova senha, por favor ignore esse e-mail.
             
@@ -31,7 +31,7 @@ const sendPasswordEmail = (res, user) => {
             `+ link + `
 
             ©2021 CorchoForce`,
-        html:`
+        html: `
             <!doctype html><html
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:v="urn:schemas-microsoft-com:vml"
@@ -214,7 +214,7 @@ const sendPasswordEmail = (res, user) => {
                                                                                     <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
                                                                                         <tr>
                                                                                             <td align="center" style="font-size:0px;padding:8px 0 0 0;word-break:break-word;">
-                                                                                                <div style="font-family:-apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;font-size:22px;font-weight:600;line-height:1.2;text-align:center;color:#000000;">Alteração de senha</div>
+                                                                                                <div style="font-family:-apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;font-size:22px;font-weight:600;line-height:1.2;text-align:center;color:#000000;">Alteração de senha 🔐</div>
                                                                                             </td>
                                                                                         </tr>
                                                                                     </table>
@@ -407,7 +407,7 @@ const sendPasswordEmail = (res, user) => {
     }
     smtpTransport.sendMail(mailOptions, (error) => {
         if (error) {
-            res.status(418).json({message: "Erro inesperado ao enviar o email de confirmação."})        
+            res.status(418).json({ message: "Erro inesperado ao enviar o email de confirmação." })
         } else {
             res.status(200).json({ message: "Email enviado" });
         }
