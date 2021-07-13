@@ -9,7 +9,7 @@ const { restart } = require("nodemon");
 const { generateHashPassword } = require("../utils/hash");
 
 
-router.post('/sendpassword', (req, res, next) => {
+router.post('/', (req, res, next) => {
   const user = userModel.findOne({email: req.body.email}).exec();
   user
   .then((user) => {
@@ -25,7 +25,7 @@ router.post('/sendpassword', (req, res, next) => {
    
 });
 
-router.post('/updatepassword', (req, res, next) => {
+router.put('/', (req, res, next) => {
   const user = req.authUser;
   const updatedUser = userModel.findOneAndUpdate({ _id: user._id }, { password: generateHashPassword(req.body.password) }).exec();
   updatedUser
@@ -42,4 +42,4 @@ router.post('/updatepassword', (req, res, next) => {
     });
 });
 
-module.exports = { url: "/password", router };
+module.exports = { url: "/recover_password", router };
