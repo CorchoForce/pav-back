@@ -1,4 +1,5 @@
 # Pega A Visão
+<a href="https://codeclimate.com/github/CorchoForce/pav-back/maintainability"><img src="https://api.codeclimate.com/v1/badges/9737d22fb78cd9355932/maintainability" /></a>
 
 ![demonstration](https://cdn.discordapp.com/attachments/539836343094870016/843711267016409098/2021-05-16_21-36-26_online-video-cutter.com.gif)
 
