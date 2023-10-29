@@ -18,8 +18,8 @@ const sendPasswordEmail = (res, user) => {
   const token = jwt.sign(user, "1h");
 
   link = process.env["FRONT_URL"] + "/update_password?token=" + token;
-  mailOptions = {
-    from: "Equipe Pega A Visão <mailgun@" + process.env.MAILGUN_DOMAIN + ">",
+  data = {
+    from: "Equipe Pega A Visão <corchoforce@gmail.com>",
     to: "corchoforce@gmail.com", // user.email
     subject: "[Pega A Visão] Redefinição de senha",
     text:
