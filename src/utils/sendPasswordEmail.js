@@ -1,37 +1,40 @@
-const nodemailer = require("nodemailer");
 const jwt = require("./jwt");
+const formData = require("form-data");
+const Mailgun = require("mailgun.js");
+const mailgun = new Mailgun(formData);
 
-const smtpTransport = nodemailer.createTransport({
-    service: "Gmail",
-    auth: {
-        user: process.env["EMAIL_KEY"],
-        pass: process.env["EMAIL_PASSWORD"]
-    },
-    from: process.env["EMAIL_KEY"] + "@" + process.env["EMAIL_DOMAIN"],
+// Initialize the Mailgun client with your API key
+const mg = mailgun.client({
+  username: "api",
+  key: process.env.MAILGUN_API_KEY,
 });
 
 const sendPasswordEmail = (res, user) => {
-    if (process.env.NODE_ENV === "test") {
-        res.status(200).json({ message: "Email enviado" });
-        return;
-    }
+  if (process.env.NODE_ENV === "test") {
+    res.status(200).json({ message: "Email enviado" });
+    return;
+  }
 
-    const token = jwt.sign(user, '1h');
+  const token = jwt.sign(user, "1h");
 
-    link = process.env['FRONT_URL'] + "/update_password?token=" + token;
-    mailOptions = {
-        from: smtpTransport.from,
-        to: user.email,
-        subject: "[Pega A Visão] Redefinição de senha",
-        text: `
+  link = process.env["FRONT_URL"] + "/update_password?token=" + token;
+  mailOptions = {
+    from: "Equipe Pega A Visão <mailgun@" + process.env.MAILGUN_DOMAIN + ">",
+    to: "corchoforce@gmail.com", // user.email
+    subject: "[Pega A Visão] Redefinição de senha",
+    text:
+      `
             Alteração de senha
             Altere sua senha pelo link abaixo. Caso não tenha solicitado uma nova senha, por favor ignore esse e-mail.
             
 
-            `+ link + `
+            ` +
+      link +
+      `
 
             ©2021 CorchoForce`,
-        html: `
+    html:
+      `
             <!doctype html><html
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:v="urn:schemas-microsoft-com:vml"
@@ -312,7 +315,9 @@ const sendPasswordEmail = (res, user) => {
                                                                                                     <span style="color: #000000;">Altere sua senha pelo link abaixo.</span> Caso não tenha solicitado uma nova senha, por favor ignore esse e-mail.
                                                                                                 </div>
                                                                                                 <div style="font-family:-apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;font-size:18px;font-weight:600;line-height:5;text-align:center;color:#8E8E92;">
-                                                                                                    <a style="color: #4d4dff;text-decoration: none;" href="`+ link + `"> Clique aqui para alterar a senha</a>️
+                                                                                                    <a style="color: #4d4dff;text-decoration: none;" href="` +
+      link +
+      `"> Clique aqui para alterar a senha</a>️
                                                                                                 </div>
                                                                                             </td>
                                                                                         </tr>
@@ -403,15 +408,20 @@ const sendPasswordEmail = (res, user) => {
                                 <br/>
                             </body>
                         </html>
-        `
-    }
-    smtpTransport.sendMail(mailOptions, (error) => {
-        if (error) {
-            res.status(418).json({ message: "Erro inesperado ao enviar o email de confirmação." })
-        } else {
-            res.status(200).json({ message: "Email enviado" });
-        }
+        `,
+  };
+  // Send the email using Mailgun
+  mg.messages
+    .create(process.env.MAILGUN_DOMAIN, data)
+    .then(() => {
+      res.status(200).json({ message: "Email enviado" });
+    })
+    .catch((err) => {
+      console.log(err); // logs any error
+      res
+        .status(418)
+        .json({ message: "Erro inesperado ao enviar o email de confirmação." });
     });
-}
+};
 
 module.exports = sendPasswordEmail;
